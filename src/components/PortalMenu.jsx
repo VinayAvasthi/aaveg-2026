@@ -51,16 +51,18 @@ export default function PortalMenu({ visible }) {
     const w = typeof window !== 'undefined' ? window.innerWidth : 1200;
     const h = typeof window !== 'undefined' ? window.innerHeight : 800;
     const minDim = Math.min(w, h);
-    if (w < 600) return 140;
-    if (w < 900) return 195;
-    return Math.min(300, minDim * 0.32);
+    if (w < 480) return Math.min(115, Math.floor(minDim * 0.28));
+    if (w < 768) return 145;
+    if (w < 1024) return 195;
+    return Math.min(300, Math.floor(minDim * 0.32));
   }, []);
 
   // Responsive card size
   const getCardSize = useCallback(() => {
     const w = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    if (w < 600) return 180;
-    if (w < 900) return 235;
+    if (w < 480) return 130;
+    if (w < 768) return 165;
+    if (w < 1024) return 220;
     return 275;
   }, []);
 
@@ -150,8 +152,8 @@ export default function PortalMenu({ visible }) {
 
   const radius = getRadius();
   const cardSize = getCardSize();
-  const liquidSize = Math.max(115, Math.floor(cardSize * 0.56));
-  const lanternSize = Math.max(125, Math.floor(radius * 0.62));
+  const liquidSize = Math.max(68, Math.floor(cardSize * 0.52));
+  const lanternSize = Math.max(75, Math.floor(radius * 0.60));
 
   return (
     <div

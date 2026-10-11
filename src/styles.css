@@ -202,3 +202,27 @@ a{color:inherit}
     display: none;
   }
 }
+
+@media (max-width: 600px) {
+  .portal-circular-card {
+    padding: 10px 8px;
+  }
+  .portal-node-badge {
+    width: 22px;
+    height: 22px;
+    top: 4px;
+  }
+  .portal-node-badge span {
+    font-size: 0.62rem;
+  }
+  .portal-card-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+  }
+  .portal-card-body {
+    margin-top: 6px;
+  }
+  .scroll-target {
+    bottom: max(20px, env(safe-area-inset-bottom, 20px));
+  }
+}

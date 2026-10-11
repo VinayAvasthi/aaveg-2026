@@ -257,13 +257,13 @@ export function createForest(THREE, mergeGeometries, container, progressRef) {
 
       // Updated dates: 22 – 24 OCTOBER 2026
       const dateY = destY + targetH + 85;
-      tg.font = '700 50px "Cinzel", "DM Sans", sans-serif';
+      tg.font = '800 56px "Cinzel", "DM Sans", sans-serif';
       tg.textAlign = 'center';
       tg.textBaseline = 'middle';
-      if ('letterSpacing' in tg) tg.letterSpacing = '12px';
+      if ('letterSpacing' in tg) tg.letterSpacing = '10px';
       tg.fillStyle = '#FF5263';
-      tg.shadowColor = 'rgba(255, 30, 45, 0.9)';
-      tg.shadowBlur = 20;
+      tg.shadowColor = 'rgba(255, 30, 45, 0.95)';
+      tg.shadowBlur = 24;
       tg.fillText('—  22 – 24  OCTOBER  2026  —', 1024, dateY);
       tg.shadowBlur = 0;
     } else {
@@ -287,10 +287,10 @@ export function createForest(THREE, mergeGeometries, container, progressRef) {
       if ('letterSpacing' in tg) tg.letterSpacing = '14px';
       tg.fillStyle = '#FFF0F3'; tg.fillText('POORNIMA COLLEGE OF ENGINEERING', 1024, 525);
 
-      tg.font = '700 44px "DM Sans", sans-serif';
+      tg.font = '800 56px "DM Sans", sans-serif';
       if ('letterSpacing' in tg) tg.letterSpacing = '10px';
-      tg.fillStyle = '#FF5263'; tg.shadowBlur = 14;
-      tg.fillText('22 – 24  OCTOBER  2026', 1024, 610);
+      tg.fillStyle = '#FF5263'; tg.shadowBlur = 20;
+      tg.fillText('22 – 24  OCTOBER  2026', 1024, 620);
       tg.shadowBlur = 0;
     }
   };
@@ -343,8 +343,10 @@ export function createForest(THREE, mergeGeometries, container, progressRef) {
     const w = container.clientWidth || window.innerWidth, h = container.clientHeight || window.innerHeight;
     renderer.setSize(w, h, false); renderer.domElement.style.cssText = 'width:100%;height:100%;display:block';
     const aspect = w / h; camera.aspect = aspect; camera.fov = aspect < 0.8 ? 72 : 58; camera.updateProjectionMatrix();
-    const visW = 2 * 26 * Math.tan((camera.fov * Math.PI) / 360) * aspect;
-    title.scale.setScalar(Math.min(1.15, (visW * 0.82) / 30));
+    const visH = 2 * 20 * Math.tan((camera.fov * Math.PI) / 360);
+    const visW = visH * aspect;
+    const fitScale = (visW * (aspect < 0.8 ? 0.85 : 0.92)) / 36;
+    title.scale.setScalar(Math.min(1.05, fitScale));
   };
   resize();
   const ro = new ResizeObserver(resize); ro.observe(container);
@@ -399,8 +401,11 @@ export function createForest(THREE, mergeGeometries, container, progressRef) {
     // Remove title when door begins to open (completely gone by 86%)
     title.position.lerpVectors(titleStart, titleEnd, sstep(0, 0.58, cur));
     title.lookAt(camera.position);
-    const baseScale = camera.aspect < 0.8 ? 0.78 : 1.1;
-    const titleScale = baseScale * (1.1 + sstep(0, 0.58, cur) * 0.65);
+    const visH = 2 * 20 * Math.tan((camera.fov * Math.PI) / 360);
+    const visW = visH * camera.aspect;
+    const fitScale = (visW * (camera.aspect < 0.8 ? 0.85 : 0.92)) / 36;
+    const baseScale = Math.min(1.05, fitScale);
+    const titleScale = baseScale * (1.0 + sstep(0, 0.58, cur) * 0.45);
     title.scale.setScalar(titleScale);
     titleMat.opacity = 1 - sstep(0.76, 0.86, cur);
     title.visible = titleMat.opacity > 0.01;

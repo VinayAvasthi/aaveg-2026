@@ -1,0 +1,204 @@
+:root{
+  --black:#070608;
+  --charcoal:#11090D;
+  --wine:#1C070C;
+  --red:#E50914;
+  --red-bright:#FF2B3C;
+  --red-dark:#7A060E;
+  --bone:#F5EAEB;
+  --silver:#B8A8AB;
+  --silver-dim:#7D6E72;
+  --border-subtle:rgba(255,255,255,0.08);
+  --border-accent:rgba(229,9,20,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--bone);font-family:'DM Sans',system-ui,sans-serif;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+ul{list-style:none}
+a{color:inherit}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:2px solid var(--red-bright);outline-offset:3px;border-radius:4px}
+
+/* ═══ Hero Sequence ═══ */
+.hero{position:relative;height:700vh}
+.hero-static{height:100vh;height:100svh}
+.hero-sticky{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#070608}
+.hero-shade{position:absolute;inset:0;pointer-events:none;z-index:4;background:linear-gradient(to top,rgba(7,6,8,.5) 0%,transparent 16%),linear-gradient(to bottom,rgba(7,6,8,.65) 0%,transparent 16%)}
+
+.castle-sequence-wrap{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;background:#070608}
+.castle-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.forest-canvas{position:absolute;inset:0;width:100%;height:100%}
+
+/* Scroll Indicator */
+.scroll-target{position:absolute;left:0;right:0;bottom:30px;display:grid;justify-items:center;gap:12px;z-index:12;pointer-events:none;transition:opacity .3s}
+.scroll-text{font:700 .72rem 'DM Sans',sans-serif;letter-spacing:.38em;color:var(--silver);text-transform:uppercase}
+.scroll-rings{position:relative;width:38px;height:38px;display:grid;place-items:center}
+.ring{position:absolute;border-radius:50%;border:1.5px solid var(--red-bright);box-sizing:border-box}
+.ring-outer{width:36px;height:36px;border-color:rgba(229,9,20,0.4);animation:ringPulse 2s cubic-bezier(.2,.8,.2,1) infinite}
+.ring-inner{width:20px;height:20px;border-color:rgba(229,9,20,0.8);animation:ringPulse 2s .35s cubic-bezier(.2,.8,.2,1) infinite}
+.ring-core{width:6px;height:6px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 10px var(--red-bright)}
+@keyframes ringPulse{0%{transform:scale(.7);opacity:0}50%{opacity:1}100%{transform:scale(1.25);opacity:0}}
+
+/* Atmosphere */
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.65))}
+.grain{position:fixed;inset:-50%;pointer-events:none;z-index:41;opacity:.08;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-4%,3%)}40%{transform:translate(3%,-5%)}60%{transform:translate(-5%,-2%)}80%{transform:translate(4%,4%)}100%{transform:translate(0,0)}}
+
+/* ═══ Portal Menu (Astrological Liquid Glass Constellation) ═══ */
+/* ═══ Portal Menu (Astrological Liquid Glass Constellation) ═══ */
+.portal-menu-wrap{position:absolute;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity 1.5s cubic-bezier(.22,1,.36,1)}
+.portal-atmosphere-backdrop{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+
+/* Red-themed color grading and cinematic smooth scale transition */
+.portal-bg-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.68) contrast(1.22) sepia(0.65) hue-rotate(-52deg) saturate(3.4);transform:scale(1.08);opacity:0;transition:transform 2.2s cubic-bezier(.16,1,.3,1),opacity 1.6s ease-out;animation:bgSubtleBreathe 24s ease-in-out infinite alternate}
+.portal-menu-wrap.portal-active .portal-bg-image{opacity:1;transform:scale(1.03)}
+@keyframes bgSubtleBreathe{0%{transform:scale(1.02)}100%{transform:scale(1.06)}}
+
+/* Deep crimson & wine gothic gradient layers */
+.portal-bg-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(160,8,22,0.42) 0%,rgba(70,4,10,0.62) 50%,rgba(7,6,8,0.85) 75%,#070608 100%)}
+.portal-red-fog{position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(229,9,20,0.28) 0%,rgba(180,6,16,0.12) 40%,transparent 70%);mix-blend-mode:screen;animation:fogDrift 8s ease-in-out infinite alternate}
+@keyframes fogDrift{0%{opacity:.6;transform:scale(1)}100%{opacity:1;transform:scale(1.08)}}
+
+/* Flying silhouette bats */
+.portal-bat{position:absolute;pointer-events:none;z-index:2;opacity:0}
+.portal-bat path{transform-origin:center;animation:batFlap .22s ease-in-out infinite alternate}
+@keyframes batFlap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(0.35)}}
+
+.bat-1{width:34px;animation:batFly1 14s linear infinite}
+.bat-2{width:22px;animation:batFly2 18s 3s linear infinite}
+.bat-3{width:28px;animation:batFly3 15s 7s linear infinite}
+.bat-4{width:18px;animation:batFly4 12s 5s linear infinite}
+
+@keyframes batFly1{
+  0%{transform:translate(-10vw,16vh) rotate(15deg) scale(.6);opacity:0}
+  12%{opacity:.8}
+  50%{transform:translate(50vw,10vh) rotate(5deg) scale(.9)}
+  88%{opacity:.8}
+  100%{transform:translate(110vw,24vh) rotate(-10deg) scale(1.1);opacity:0}
+}
+@keyframes batFly2{
+  0%{transform:translate(110vw,26vh) rotate(-20deg) scale(.7);opacity:0}
+  12%{opacity:.75}
+  50%{transform:translate(55vw,18vh) rotate(-5deg) scale(.85)}
+  88%{opacity:.75}
+  100%{transform:translate(-10vw,12vh) rotate(15deg) scale(.5);opacity:0}
+}
+@keyframes batFly3{
+  0%{transform:translate(15vw,-5vh) rotate(35deg) scale(.5);opacity:0}
+  12%{opacity:.8}
+  60%{transform:translate(85vw,34vh) rotate(10deg) scale(1)}
+  88%{opacity:.8}
+  100%{transform:translate(110vw,42vh) rotate(-5deg) scale(1.1);opacity:0}
+}
+@keyframes batFly4{
+  0%{transform:translate(95vw,6vh) rotate(-30deg) scale(.5);opacity:0}
+  12%{opacity:.7}
+  50%{transform:translate(30vw,24vh) rotate(-10deg) scale(.8)}
+  88%{opacity:.7}
+  100%{transform:translate(-10vw,36vh) rotate(15deg) scale(1);opacity:0}
+}
+
+/* Floating crimson embers */
+.portal-embers-layer{position:absolute;inset:0;pointer-events:none;z-index:2}
+.p-ember{position:absolute;border-radius:50%;background:#FF2B3C;box-shadow:0 0 10px #FF2B3C;animation:emberFloat 6s ease-in-out infinite}
+.e-1{left:15%;bottom:12%;width:4px;height:4px;animation-duration:5s}
+.e-2{left:35%;bottom:8%;width:3px;height:3px;animation-duration:7s;animation-delay:1.5s}
+.e-3{left:60%;bottom:15%;width:4px;height:4px;animation-duration:6s;animation-delay:2.5s}
+.e-4{left:80%;bottom:10%;width:3px;height:3px;animation-duration:5.5s;animation-delay:0.8s}
+.e-5{left:48%;bottom:6%;width:5px;height:5px;animation-duration:8s;animation-delay:3s}
+.e-6{left:25%;bottom:18%;width:3px;height:3px;animation-duration:6.5s;animation-delay:2s}
+@keyframes emberFloat{0%{transform:translateY(0) scale(.8);opacity:0}20%{opacity:.9}80%{opacity:.8}100%{transform:translateY(-35vh) translateX(25px) scale(1.2);opacity:0}}
+
+.portal-celestial-canvas{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;perspective:1000px;transition:transform .15s ease-out}
+
+/* SVG Astrolabe Coordinates & Celestial Rings */
+.portal-astrolabe-svg{position:absolute;width:min(94vmin,780px);height:min(94vmin,780px);pointer-events:none;z-index:2;animation:astrolabeDrift 80s linear infinite}
+@keyframes astrolabeDrift{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+
+/* Crescent Moon at the top axis */
+.portal-celestial-moon{position:absolute;top:calc(50% - min(46vmin,380px) * 0.76);z-index:3;display:grid;place-items:center;filter:drop-shadow(0 0 12px rgba(255,170,64,0.6));animation:moonPulse 4s ease-in-out infinite}
+@keyframes moonPulse{0%,100%{opacity:.85;transform:scale(1)}50%{opacity:1;transform:scale(1.06)}}
+
+/* Central Hanging Gothic Lantern with Armillary Rings & Liquid Glass */
+.portal-center-lantern-unit{position:absolute;z-index:4;display:flex;flex-direction:column;align-items:center;pointer-events:none;animation:lanternSway 6s ease-in-out infinite}
+@keyframes lanternSway{0%,100%{transform:rotate(-1.2deg)}50%{transform:rotate(1.2deg)}}
+.portal-lantern-chain{width:2px;height:min(18vh,110px);background:linear-gradient(to bottom,transparent,rgba(255,170,60,0.5) 20%,rgba(255,185,80,0.9));box-shadow:0 0 8px rgba(255,160,40,0.6)}
+
+.portal-lantern-glow-aura{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(44vmin,320px);height:min(44vmin,320px);border-radius:50%;background:radial-gradient(circle,rgba(255,160,50,0.42) 0%,rgba(229,40,20,0.2) 45%,transparent 70%);filter:blur(14px);animation:auraBreathe 3.5s ease-in-out infinite alternate}
+@keyframes auraBreathe{0%{opacity:.75;transform:translate(-50%,-50%) scale(0.92)}100%{opacity:1;transform:translate(-50%,-50%) scale(1.12)}}
+
+.portal-lantern-radial-flare{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(50vmin,360px);height:min(50vmin,360px);border-radius:50%;background:radial-gradient(circle,rgba(255,200,90,0.3) 0%,rgba(255,130,30,0.1) 50%,transparent 70%);mix-blend-mode:screen;pointer-events:none;animation:flarePulse 4s ease-in-out infinite alternate}
+@keyframes flarePulse{0%{opacity:.6;transform:translate(-50%,-50%) scale(0.88)}100%{opacity:1;transform:translate(-50%,-50%) scale(1.18)}}
+
+/* Rotating Brass Armillary Gyroscope Rings */
+.portal-armillary-ring{position:absolute;top:50%;left:50%;border-radius:50%;border:1.8px solid rgba(255,190,80,0.75);box-shadow:0 0 20px rgba(255,160,40,0.55),inset 0 0 12px rgba(255,180,60,0.35);pointer-events:none}
+.a-ring-1{animation:armillarySpin1 16s linear infinite}
+.a-ring-2{border-style:dashed;border-width:1.5px;animation:armillarySpin2 22s linear infinite reverse}
+@keyframes armillarySpin1{0%{transform:translate(-50%,-50%) rotateX(65deg) rotateY(15deg) rotateZ(0deg)}100%{transform:translate(-50%,-50%) rotateX(65deg) rotateY(15deg) rotateZ(360deg)}}
+@keyframes armillarySpin2{0%{transform:translate(-50%,-50%) rotateX(-45deg) rotateY(55deg) rotateZ(0deg)}100%{transform:translate(-50%,-50%) rotateX(-45deg) rotateY(55deg) rotateZ(360deg)}}
+
+/* Liquid Glass Frame for Lantern */
+.portal-lantern-frame{position:relative;border-radius:50%;display:grid;place-items:center;border:2.5px solid rgba(255,190,80,0.9);box-shadow:0 0 45px -2px rgba(255,160,40,0.95),0 0 95px -10px rgba(229,9,20,0.75),inset 0 0 30px rgba(255,190,60,0.55);overflow:hidden;backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%)}
+.portal-candle-flicker{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 55%,rgba(255,220,130,0.4),rgba(255,140,30,0.15) 45%,transparent 65%);mix-blend-mode:screen;animation:candleFlicker .4s ease-in-out infinite alternate}
+@keyframes candleFlicker{0%{opacity:.7}100%{opacity:1}}
+
+/* ═══ Liquid Glass Circular Cards ═══ */
+.portal-circular-card{position:absolute;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;color:#FFF;cursor:pointer;z-index:6;box-sizing:border-box;padding:18px 14px;background:radial-gradient(circle at 35% 30%,rgba(65,16,28,0.85) 0%,rgba(22,6,14,0.92) 65%,rgba(8,2,5,0.98) 100%);backdrop-filter:blur(18px) saturate(180%) contrast(1.1);-webkit-backdrop-filter:blur(18px) saturate(180%) contrast(1.1);border:2px solid rgba(255,175,65,0.75);box-shadow:0 0 45px -4px rgba(255,140,30,0.65),0 0 90px -15px rgba(229,9,20,0.5),inset 0 1.5px 2px rgba(255,255,255,0.45),inset 0 -2px 8px rgba(229,9,20,0.4);transition:border-color .35s,box-shadow .35s,transform .35s cubic-bezier(.16,1,.3,1);overflow:hidden}
+.portal-circular-card:hover{border-color:#FFAA40;box-shadow:0 0 75px -2px rgba(255,160,50,0.9),0 0 120px -10px rgba(229,9,20,0.75),inset 0 0 45px rgba(255,190,80,0.35);transform:scale(1.03)}
+.portal-card--selected{border-color:#FFAA40!important;box-shadow:0 0 95px 0 rgba(255,160,40,0.98)!important}
+
+/* Liquid Glass Number Badge */
+.portal-node-badge{position:absolute;top:6px;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,200,100,0.3) 0%,rgba(20,6,12,0.95) 75%);backdrop-filter:blur(12px);border:1.5px solid rgba(255,185,75,0.95);display:grid;place-items:center;z-index:8;box-shadow:0 0 16px rgba(255,160,40,0.85),inset 0 1px 2px rgba(255,255,255,0.8)}
+.portal-node-badge span{font:700 .72rem 'DM Sans',sans-serif;letter-spacing:.05em;color:#FFAA40}
+
+/* Liquid Glass Lens Container with High Visibility */
+.portal-liquid-lens-container{position:relative;border-radius:50%;display:grid;place-items:center;margin-top:2px;border:2.5px solid rgba(255,190,80,0.9);box-shadow:0 0 35px -2px rgba(255,150,40,0.9),0 0 70px -8px rgba(229,9,20,0.65),inset 0 0 22px rgba(255,190,60,0.5);animation:lensGlowPulse 4s ease-in-out infinite alternate}
+@keyframes lensGlowPulse{0%{box-shadow:0 0 28px -2px rgba(255,150,40,0.8),0 0 55px -8px rgba(229,9,20,0.55)}100%{box-shadow:0 0 46px 0 rgba(255,175,60,0.98),0 0 85px -6px rgba(229,9,20,0.75)}}
+.portal-glass-specular-arc{position:absolute;inset:2px;border-radius:50%;pointer-events:none;border-top:2.5px solid rgba(255,255,255,0.75);border-left:1.5px solid rgba(255,255,255,0.4);opacity:.95}
+
+/* Card Body Typography */
+.portal-card-body{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;margin-top:10px;max-width:92%;text-align:center}
+.portal-card-title{font:800 clamp(.72rem,1.4vw,.95rem) 'DM Sans',sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#FFF2F5;text-shadow:0 0 22px rgba(255,170,60,0.95),0 0 8px rgba(229,9,20,0.6),0 2px 4px #000;margin:0;line-height:1.25;text-align:center}
+
+/* Compass Star Accents on Circular Rim */
+.portal-rim-star{position:absolute;font-size:.65rem;color:#FFAA40;pointer-events:none;filter:drop-shadow(0 0 5px rgba(255,160,40,0.9))}
+.portal-rim-star--w{left:-7px;top:50%;transform:translateY(-50%)}
+.portal-rim-star--e{right:-7px;top:50%;transform:translateY(-50%)}
+.portal-rim-star--s{bottom:-7px;left:50%;transform:translateX(-50%)}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .grain{animation:none}
+}
+
+/* ═══ 4-Act Cinematic Chronicle Animations & Styles ═══ */
+@keyframes recordPulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 12px #FF2B3C; }
+  50% { opacity: 0.35; transform: scale(0.85); box-shadow: 0 0 4px #FF2B3C; }
+}
+
+@keyframes shimmerSweep {
+  0% { background-position: 220% 0; }
+  100% { background-position: -20% 0; }
+}
+
+@keyframes spinBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatHarmonic {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(calc(-1 * var(--float-dist, 10px))) rotate(var(--float-rot, 2deg)); }
+}
+
+.desktop-hud-title {
+  display: inline;
+}
+@media (max-width: 768px) {
+  .desktop-hud-title {
+    display: none;
+  }
+}

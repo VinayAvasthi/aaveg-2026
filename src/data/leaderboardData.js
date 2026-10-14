@@ -1,12 +1,12 @@
 export const HOUSE_POINTS = {
-  'house-1': 1420,
-  'house-2': 1350,
-  'house-3': 1290,
-  'house-4': 1180,
-  'house-5': 1140,
-  'house-6': 1060,
-  'house-7': 980,
-  'house-8': 920,
+  'house-1': 0,
+  'house-2': 0,
+  'house-3': 0,
+  'house-4': 0,
+  'house-5': 0,
+  'house-6': 0,
+  'house-7': 0,
+  'house-8': 0,
 };
 
 export function getSortedLeaderboard(housesList = []) {

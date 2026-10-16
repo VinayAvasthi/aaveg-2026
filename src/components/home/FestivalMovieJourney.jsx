@@ -799,8 +799,13 @@ export default function FestivalMovieJourney() {
             <a href="https://aaveg-2026-two.vercel.app/#houses" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Houses</a>
             <a href="https://aaveg-2026-two.vercel.app/#leaderboard" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Leaderboard</a>
           </div>
+          <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Developed by:</h3>
           <div style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>
-            Developed by: Divyansh Yadav (CSE), Aryan Gour (CSE), Kuldeep Gurjar (AI), Ishank Kukreja (AI & DS), Priyanshu Sharma (AI & DS)
+            <p style={{ margin: '0.2rem 0' }}>Divyansh Yadav (CSE)</p>
+            <p style={{ margin: '0.2rem 0' }}>Aryan Gour (CSE)</p>
+            <p style={{ margin: '0.2rem 0' }}>Kuldeep Gurjar (AI)</p>
+            <p style={{ margin: '0.2rem 0' }}>Ishank Kukreja (AI &amp; DS)</p>
+            <p style={{ margin: '0.2rem 0' }}>Priyanshu Sharma (AI &amp; DS)</p>
           </div>
         </footer>
     </section>

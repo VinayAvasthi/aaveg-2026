@@ -785,6 +785,24 @@ export default function FestivalMovieJourney() {
           </Magnetic>
         </div>
       </div>
+        {/* Footer */}
+        <footer style={{
+          marginTop: '2rem',
+          padding: '2rem 1rem',
+          background: 'rgba(0,0,0,0.85)',
+          color: '#FFFFFF',
+          textAlign: 'center',
+          borderTop: '1px solid rgba(255, 170, 64, 0.25)',
+        }}>
+          <div style={{ marginBottom: '1rem' }}>
+            <a href="https://aaveg-2026-two.vercel.app/#chronicle" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Chronicle</a>
+            <a href="https://aaveg-2026-two.vercel.app/#houses" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Houses</a>
+            <a href="https://aaveg-2026-two.vercel.app/#leaderboard" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Leaderboard</a>
+          </div>
+          <div style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>
+            Developed by: Divyansh Yadav (CSE), Aryan Gour (CSE), Kuldeep Gurjar (AI), Ishank Kukreja (AI & DS), Priyanshu Sharma (AI & DS)
+          </div>
+        </footer>
     </section>
   );
 }

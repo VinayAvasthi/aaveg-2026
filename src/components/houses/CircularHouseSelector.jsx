@@ -291,29 +291,52 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                     e.stopPropagation();
                     handleHouseConfirm();
                   }}
+                  aria-label={`Select and proceed with ${currentHouse.name}`}
                   style={{
-                    padding: 'clamp(6px, 1.8vw, 10px) clamp(14px, 3.2vw, 20px)',
-                    borderRadius: '25px',
-                    background: currentHouse.color,
-                    border: '1px solid #FFFFFF',
+                    position: 'relative',
+                    padding: 'clamp(8px, 1.8vw, 12px) clamp(16px, 3.5vw, 24px)',
+                    borderRadius: '28px',
+                    background: `linear-gradient(135deg, ${currentHouse.color} 0%, #B80D1A 100%)`,
+                    border: '1.5px solid rgba(255, 255, 255, 0.85)',
                     color: '#FFFFFF',
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 'clamp(0.72rem, 1.8vw, 0.8rem)',
+                    fontSize: 'clamp(0.74rem, 1.8vw, 0.86rem)',
                     fontWeight: '800',
-                    letterSpacing: '0.1em',
+                    letterSpacing: '0.12em',
                     textTransform: 'uppercase',
                     cursor: 'pointer',
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '6px',
-                    boxShadow: `0 4px 20px ${currentHouse.accentGlow}`,
-                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    boxShadow: `0 0 25px ${currentHouse.accentGlow}, 0 6px 20px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.4)`,
+                    transition: 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease',
                     touchAction: 'manipulation',
                     whiteSpace: 'nowrap',
+                    outline: 'none',
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
-                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.08) translateY(-2px)';
+                    e.currentTarget.style.boxShadow = `0 0 35px ${currentHouse.color}, 0 10px 25px rgba(0,0,0,0.95)`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                    e.currentTarget.style.boxShadow = `0 0 25px ${currentHouse.accentGlow}, 0 6px 20px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.4)`;
+                  }}
+                  onMouseDown={(e) => {
+                    e.currentTarget.style.transform = 'scale(0.96) translateY(1px)';
+                  }}
                 >
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      background: '#FFFFFF',
+                      boxShadow: '0 0 6px #FFFFFF',
+                    }}
+                  />
                   <span>SELECT & PROCEED</span>
                   <ArrowRight size={14} />
                 </button>
@@ -322,6 +345,66 @@ export default function CircularHouseSelector({ onSelectHouse }) {
           </MovingBorder>
         </div>
       </GridBackground>
+
+      {/* Prominent Action Bar for Mobile & Laptop */}
+      <div
+        style={{
+          marginTop: '1.75rem',
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+          maxWidth: '420px',
+          padding: '0 1rem',
+        }}
+      >
+        <MovingBorder
+          duration={3200}
+          color={currentHouse.color}
+          borderRadius="30px"
+          style={{ width: '100%' }}
+        >
+          <button
+            onClick={handleHouseConfirm}
+            onTouchEnd={(e) => {
+              e.stopPropagation();
+              handleHouseConfirm();
+            }}
+            style={{
+              width: '100%',
+              padding: '12px 24px',
+              borderRadius: '30px',
+              background: `linear-gradient(135deg, ${currentHouse.color} 0%, #15060A 100%)`,
+              border: `1.5px solid ${currentHouse.color}`,
+              color: '#FFFFFF',
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 'clamp(0.82rem, 2vw, 0.92rem)',
+              fontWeight: '800',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              boxShadow: `0 4px 25px ${currentHouse.accentGlow}`,
+              transition: 'transform 0.25s ease, box-shadow 0.25s ease',
+              touchAction: 'manipulation',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.03)';
+              e.currentTarget.style.boxShadow = `0 6px 30px ${currentHouse.color}`;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = `0 4px 25px ${currentHouse.accentGlow}`;
+            }}
+          >
+            <Sparkles size={16} style={{ color: '#FFEAA7' }} />
+            <span>CONFIRM & ENTER HOUSE {currentHouse.number}</span>
+            <ArrowRight size={16} />
+          </button>
+        </MovingBorder>
+      </div>
 
       {/* Navigation Controls */}
       <div

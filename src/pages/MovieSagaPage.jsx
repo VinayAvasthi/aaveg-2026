@@ -112,7 +112,7 @@ export default function MovieSagaPage({ onBack }) {
             }}
           >
             <Film size={14} />
-            <span>PAGE 2 OF 3 • 4-ACT CINEMATIC CHRONICLE</span>
+            <span>PAGE 2 OF 3 • CINEMATIC CHRONICLE</span>
           </div>
 
           {/* Quick Direct Actions: House Selection & Leaderboard */}

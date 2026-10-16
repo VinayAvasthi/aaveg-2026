@@ -13,7 +13,6 @@ import {
 import Button from '../common/Button';
 import CardSpotlight from '../ui/CardSpotlight';
 import MovingBorder from '../ui/MovingBorder';
-import Lamp from '../ui/Lamp';
 import Magnetic from '../ui/Magnetic';
 import FloatingElements from '../ui/FloatingElements';
 import ShinyText from '../ui/ShinyText';
@@ -28,67 +27,77 @@ export default function FestivalMovieJourney() {
   const act0Ref = useRef(null);
   const act1Ref = useRef(null);
   const act2Ref = useRef(null);
-  const act3Ref = useRef(null);
-  const actRefs = useMemo(() => [act0Ref, act1Ref, act2Ref, act3Ref], []);
+  const actRefs = useMemo(() => [act0Ref, act1Ref, act2Ref], []);
 
-  // 4 Cinematic Movie Chapters
+  // Cinematic Movie Chapters
   const chapters = [
     { id: 0, tag: 'ACT 01', name: 'THE AWAKENING', title: 'WHAT IS AAVEG?' },
-    { id: 1, tag: 'ACT 02', name: 'THE 4 NIGHTS', title: 'THE SAGA OF CHAOS' },
+    { id: 1, tag: 'ACT 02', name: 'THE 3 DAYS', title: 'THE SAGA OF CHAOS' },
     { id: 2, tag: 'ACT 03', name: 'EIGHT HOUSES', title: 'THE BATTLE FOR THE CROWN' },
-    { id: 3, tag: 'ACT 04', name: 'THE ARENA', title: 'ENTER THE ARENA' },
   ];
 
-  // The 3 Nights Data
+  // The 3 Days Data
   const nights = [
     {
-      night: 'NIGHT 01',
+      night: 'DAY 01',
       date: '22 OCT 2026',
-      title: 'NIGHT OF THE SPECTERS',
-      subtitle: 'TORCH MARCH & OPENING REVELATION',
+      title: 'THE AWAKENING',
+      subtitle: 'SPORTS, ESPORTS & CULTURE',
       color: '#FF2B3C',
-      time: '6:00 PM – MIDNIGHT',
-      venue: 'Amphitheatre & Main Quadrangle',
+      time: 'ALL DAY & NIGHT',
+      venue: 'Sports Arenas, LAN Hub & Grounds',
       summary:
-        'Over 1,500 hostellers march with blazing torches through the dark campus gates, carrying their house banners to inaugurate the 2026 festival wars.',
-      highlights: ['Torchlit Grand March', 'Acoustic Graveyard Sessions', 'Unveiling 2026 Trophy', 'Midnight Flashmob'],
+        'High-energy sporting battles, intense gaming showdowns, and creative cultural kicks. Day 1 ignites fierce rivalries and sets the stage for three days of non-stop action.',
+      highlights: [
+        'Sports: Pool, Carrom, Chess, Basketball, Badminton, Pickleball & TT',
+        'Esports: Valorant, FC Mobile & Competitive Gaming',
+        'Cultural: Scavenger Hunt, Jamming & Halloween Kickoff',
+      ],
     },
     {
-      night: 'NIGHT 02',
+      night: 'DAY 02',
       date: '23 OCT 2026',
-      title: 'THE CLASH OF HOUSES & MASQUERADE',
-      subtitle: 'SPORTS WAR, LAN INFERNO & GOTHIC ROCK',
+      title: 'THE HAUNTED CARNIVAL',
+      subtitle: 'CULTURE, CREATIVITY & GRAND NIGHT',
       color: '#FF7A32',
-      time: '10:00 AM – 11:30 PM',
-      venue: 'Floodlit Sports Grounds & PCE Auditorium',
+      time: 'ALL DAY & GRAND NIGHT',
+      venue: 'Auditorium, Open Stages & Arenas',
       summary:
-        'Eight rival houses face off in high-stakes floodlit box cricket, Valorant/BGMI LAN wars, gothic cosplay runways, and battle of the bands.',
-      highlights: ['Box Cricket & LAN War', 'Hostel Tug-of-War', 'Gothic Runway Competition', 'Battle of the College Bands'],
+        'The campus transforms into a Halloween carnival with cultural showdowns, creative arts, and entertainment leading into the most-awaited grand night of AAVEG.',
+      highlights: [
+        'Culture: Singing, Dance, Fashion Walk, Monologue, Face & Tattoo Art',
+        'Stage: Open Mic, Guess the Song, Horror Stories & Mimicry',
+        'Sports & Gaming: Volleyball, Kabaddi, Basketball, Box Cricket & Pickleball',
+      ],
     },
     {
-      night: 'NIGHT 03',
+      night: 'DAY 03',
       date: '24 OCT 2026 • FINALE',
-      title: 'EDM INFERNO & CORONATION',
-      subtitle: 'CROWNING OF THE CHAMPION HOUSE',
+      title: 'THE FINAL RECKONING',
+      subtitle: 'CHAMPIONSHIPS, TALENT & GRAND FINALE',
       color: '#FFAA40',
-      time: '7:00 PM – TILL DAWN',
-      venue: 'Main Festival Grounds',
+      time: 'FINALS TILL DAWN',
+      venue: 'Main Festival Grounds & Arenas',
       summary:
-        'The grand climax of AAVEG. Golden firework cascades erupt as the 2026 Champion House lifts the crown, before celebrity DJs take over the stage.',
-      highlights: ['Championship Cup Ceremony', 'Celebrity DJ & Laser Storm', 'The Forever Bonfire', 'Hostel Anthem Choir'],
+        'Where champions rise and rivalries peak. High-stakes sports championships, expressive cultural showcases, and the crowning of the ultimate AAVEG 2026 champion house.',
+      highlights: [
+        'Sports & Fitness: Tug of War, Kabaddi, Volleyball, Arm Wrestling & Gym Feats',
+        'Culture: Shark Tank Poornima, Poetry, Skit, Paper Dance & Rapid Dance',
+        'Climax: Trophy Coronation & Celebratory Finale',
+      ],
     },
   ];
 
   // The 8 Houses Data
   const houses = [
-    { name: 'HOUSE 1', tag: 'SCARLET TITANS', color: '#FF2B3C', motto: 'Unyielding Strength & Primal Fury', sigil: '⚔️' },
-    { name: 'HOUSE 2', tag: 'SOLAR PHOENIX', color: '#FF7A32', motto: 'Rising Above Ashes to Reign', sigil: '🐺' },
-    { name: 'HOUSE 3', tag: 'GOLDEN VALIANT', color: '#FFAA40', motto: 'Honor, Valor & Golden Legacy', sigil: '⚡' },
-    { name: 'HOUSE 4', tag: 'EMERALD VIPERS', color: '#06D6A0', motto: 'Lethal Precision & Relentless Will', sigil: '👁️' },
-    { name: 'HOUSE 5', tag: 'COBALT THUNDER', color: '#118AB2', motto: 'Strategic Dominance & Raw Power', sigil: '🐍' },
-    { name: 'HOUSE 6', tag: 'SHADOW SPECTRES', color: '#9D4EDD', motto: 'Mastery in Silence & Decisive Strikes', sigil: '🔥' },
-    { name: 'HOUSE 7', tag: 'CRIMSON BERSERKERS', color: '#EF476F', motto: 'Fearless Spirit in Every Clash', sigil: '🦅' },
-    { name: 'HOUSE 8', tag: 'FROST MONARCHS', color: '#4CC9F0', motto: 'Cold Logic, Absolute Supremacy', sigil: '💀' },
+    { name: 'HOUSE 1', tag: 'SCARLET TITANS', color: '#FF2B3C', motto: 'Unyielding Strength & Primal Fury', sigil: 'H1' },
+    { name: 'HOUSE 2', tag: 'SOLAR PHOENIX', color: '#FF7A32', motto: 'Rising Above Ashes to Reign', sigil: 'H2' },
+    { name: 'HOUSE 3', tag: 'GOLDEN VALIANT', color: '#FFAA40', motto: 'Honor, Valor & Golden Legacy', sigil: 'H3' },
+    { name: 'HOUSE 4', tag: 'EMERALD VIPERS', color: '#06D6A0', motto: 'Lethal Precision & Relentless Will', sigil: 'H4' },
+    { name: 'HOUSE 5', tag: 'COBALT THUNDER', color: '#118AB2', motto: 'Strategic Dominance & Raw Power', sigil: 'H5' },
+    { name: 'HOUSE 6', tag: 'SHADOW SPECTRES', color: '#9D4EDD', motto: 'Mastery in Silence & Decisive Strikes', sigil: 'H6' },
+    { name: 'HOUSE 7', tag: 'CRIMSON BERSERKERS', color: '#EF476F', motto: 'Fearless Spirit in Every Clash', sigil: 'H7' },
+    { name: 'HOUSE 8', tag: 'FROST MONARCHS', color: '#4CC9F0', motto: 'Cold Logic, Absolute Supremacy', sigil: 'H8' },
   ];
 
   // Track active act and journey scroll progress
@@ -151,7 +160,7 @@ export default function FestivalMovieJourney() {
           backdropFilter: 'blur(16px)',
           borderBottom: '1px solid rgba(255, 170, 64, 0.25)',
           boxShadow: '0 8px 32px rgba(0,0,0,0.85)',
-          padding: '0.75rem 1.5rem',
+          padding: '0.55rem clamp(0.75rem, 3vw, 1.5rem)',
         }}
       >
         <div
@@ -162,38 +171,39 @@ export default function FestivalMovieJourney() {
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '12px',
+            gap: '8px',
           }}
         >
           {/* Live Recording Status */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span
               style={{
-                width: '10px',
-                height: '10px',
+                width: '9px',
+                height: '9px',
                 borderRadius: '50%',
                 backgroundColor: '#FF2B3C',
                 display: 'inline-block',
-                boxShadow: '0 0 12px #FF2B3C',
+                boxShadow: '0 0 10px #FF2B3C',
                 animation: 'recordPulse 1.6s infinite',
+                flexShrink: 0,
               }}
             />
             <span
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                fontSize: '0.8rem',
+                fontSize: 'clamp(0.68rem, 2vw, 0.8rem)',
                 fontWeight: '800',
-                letterSpacing: '0.22em',
+                letterSpacing: '0.14em',
                 color: '#FFFFFF',
                 textTransform: 'uppercase',
               }}
             >
-              REC • {chapters[activeAct].tag} // {chapters[activeAct].name}
+              REC • {chapters[activeAct]?.tag || chapters[0].tag} // {chapters[activeAct]?.name || chapters[0].name}
             </span>
           </div>
 
           {/* Act Jump Controls */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
             {chapters.map((ch, idx) => (
               <button
                 key={idx}
@@ -202,16 +212,16 @@ export default function FestivalMovieJourney() {
                   background: activeAct === idx ? 'rgba(229, 9, 20, 0.3)' : 'rgba(255, 255, 255, 0.04)',
                   border: `1px solid ${activeAct === idx ? '#FF2B3C' : 'rgba(255, 255, 255, 0.12)'}`,
                   borderRadius: '20px',
-                  padding: '5px 14px',
+                  padding: '5px clamp(8px, 2vw, 14px)',
                   fontFamily: "'Cinzel', Georgia, serif",
-                  fontSize: '0.75rem',
+                  fontSize: 'clamp(0.7rem, 1.8vw, 0.75rem)',
                   fontWeight: activeAct === idx ? '800' : '600',
                   color: activeAct === idx ? '#FFAA40' : 'rgba(245, 234, 235, 0.75)',
-                  letterSpacing: '0.12em',
+                  letterSpacing: '0.1em',
                   cursor: 'pointer',
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '6px',
+                  gap: '4px',
                   transition: 'all 0.25s ease',
                   boxShadow: activeAct === idx ? '0 0 14px rgba(255, 43, 60, 0.45)' : 'none',
                 }}
@@ -225,7 +235,7 @@ export default function FestivalMovieJourney() {
           </div>
 
           {/* Quick Action */}
-          <Button to="#houses" variant="primary" size="sm">
+          <Button to="#houses" variant="primary" size="sm" style={{ padding: '6px 14px', fontSize: '0.75rem' }}>
             SELECT HOUSE
           </Button>
         </div>
@@ -261,32 +271,32 @@ export default function FestivalMovieJourney() {
         id="act-01"
         style={{
           position: 'relative',
-          padding: '6rem 1.5rem',
+          padding: 'clamp(3rem, 7vw, 6rem) clamp(1rem, 3.5vw, 1.5rem)',
           borderBottom: '1px solid rgba(255, 170, 64, 0.15)',
           background: 'radial-gradient(ellipse at 50% 30%, rgba(180, 10, 20, 0.12) 0%, transparent 65%)',
         }}
       >
         <GridBackground color="rgba(255, 43, 60, 0.06)" maskRadius="65%">
           <div style={{ maxWidth: '1280px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 10 }}>
-            <FloatingElements duration={4} distance={5} rotate={1}>
+            <FloatingElements duration={4} distance={4} rotate={1}>
               <div
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  padding: '6px 20px',
+                  padding: '6px clamp(12px, 3vw, 20px)',
                   borderRadius: '30px',
                   background: 'rgba(229, 9, 20, 0.15)',
                   border: '1px solid rgba(255, 170, 64, 0.45)',
                   color: '#FFAA40',
-                  fontSize: '0.82rem',
+                  fontSize: 'clamp(0.72rem, 2vw, 0.82rem)',
                   fontWeight: '800',
-                  letterSpacing: '0.22em',
+                  letterSpacing: '0.18em',
                   textTransform: 'uppercase',
                   marginBottom: '1.25rem',
                 }}
               >
-                <Flame size={15} />
+                <Flame size={15} style={{ flexShrink: 0 }} />
                 <span>ACT 01 // PROLOGUE • THE AWAKENING OF MADNESS</span>
               </div>
             </FloatingElements>
@@ -294,14 +304,14 @@ export default function FestivalMovieJourney() {
             <h2
               style={{
                 fontFamily: "'Cinzel Decorative', 'Anton', serif",
-                fontSize: 'clamp(2.8rem, 6.5vw, 5.2rem)',
+                fontSize: 'clamp(2.4rem, 6.5vw, 5.2rem)',
                 fontWeight: '900',
                 color: '#FFFFFF',
                 textTransform: 'uppercase',
                 letterSpacing: '0.06em',
                 lineHeight: '1.05',
                 maxWidth: '920px',
-                margin: '0 auto 1.5rem auto',
+                margin: '0 auto 1.25rem auto',
                 textShadow: '0 4px 30px rgba(0,0,0,0.95), 0 0 45px rgba(255, 43, 60, 0.5)',
               }}
             >
@@ -314,11 +324,11 @@ export default function FestivalMovieJourney() {
             <p
               style={{
                 fontFamily: "'DM Sans', sans-serif",
-                fontSize: 'clamp(1.05rem, 1.8vw, 1.3rem)',
+                fontSize: 'clamp(0.95rem, 1.8vw, 1.25rem)',
                 color: '#E0D4D6',
                 maxWidth: '820px',
                 lineHeight: '1.7',
-                margin: '0 auto 3rem auto',
+                margin: '0 auto 2.5rem auto',
               }}
             >
               AAVEG is not merely an annual college event. It is a 3-day supernatural adrenaline phenomenon where
@@ -335,10 +345,10 @@ export default function FestivalMovieJourney() {
                 { num: '01', label: 'ETERNAL TROPHY', desc: 'Only one house hoists the legendary Aaveg Cup.' },
               ]}
               style={{
-                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-                gap: '1.25rem',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(135px, 42vw, 240px), 1fr))',
+                gap: 'clamp(0.75rem, 2vw, 1.25rem)',
                 maxWidth: '1150px',
-                margin: '0 auto 3rem auto',
+                margin: '0 auto 2.5rem auto',
               }}
               renderCard={(stat, i, isHovered) => (
                 <CardSpotlight
@@ -347,7 +357,7 @@ export default function FestivalMovieJourney() {
                   glowRadius={280}
                   tilt={true}
                   style={{
-                    padding: '2.2rem 1.4rem',
+                    padding: 'clamp(1.4rem, 3vw, 2.2rem) clamp(0.75rem, 2vw, 1.4rem)',
                     textAlign: 'center',
                     background: isHovered ? 'radial-gradient(circle, rgba(45, 12, 18, 0.95), rgba(12, 5, 8, 0.98))' : 'radial-gradient(circle, rgba(24, 8, 14, 0.88), rgba(8, 3, 6, 0.94))',
                     border: isHovered ? '1.5px solid #FFAA40' : '1px solid rgba(255, 170, 64, 0.25)',
@@ -357,7 +367,7 @@ export default function FestivalMovieJourney() {
                   <div
                     style={{
                     fontFamily: "'Anton', 'Cinzel', sans-serif",
-                    fontSize: '3.4rem',
+                    fontSize: 'clamp(2.4rem, 6vw, 3.4rem)',
                     color: '#FF2B3C',
                     lineHeight: '1',
                     marginBottom: '8px',
@@ -371,16 +381,16 @@ export default function FestivalMovieJourney() {
                 <div
                   style={{
                     fontFamily: "'Cinzel', Georgia, serif",
-                    fontSize: '0.92rem',
+                    fontSize: 'clamp(0.78rem, 1.8vw, 0.92rem)',
                     fontWeight: '800',
                     color: '#FFFFFF',
-                    letterSpacing: '0.12em',
+                    letterSpacing: '0.1em',
                     marginBottom: '6px',
                   }}
                 >
                   {stat.label}
                 </div>
-                <div style={{ fontSize: '0.84rem', color: '#B8A8AB', lineHeight: '1.45' }}>
+                <div style={{ fontSize: 'clamp(0.75rem, 1.6vw, 0.84rem)', color: '#B8A8AB', lineHeight: '1.45' }}>
                   {stat.desc}
                 </div>
               </CardSpotlight>
@@ -409,38 +419,38 @@ export default function FestivalMovieJourney() {
       id="act-02"
       style={{
         position: 'relative',
-        padding: '6rem 1.5rem',
+        padding: 'clamp(3rem, 7vw, 6rem) clamp(1rem, 3.5vw, 1.5rem)',
         borderBottom: '1px solid rgba(255, 170, 64, 0.15)',
         background: 'radial-gradient(ellipse at 50% 50%, rgba(229, 9, 20, 0.1) 0%, transparent 70%)',
       }}
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <div
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              padding: '6px 20px',
+              padding: '6px clamp(12px, 3vw, 20px)',
               borderRadius: '30px',
               background: 'rgba(255, 122, 50, 0.14)',
               border: '1px solid rgba(255, 170, 64, 0.45)',
               color: '#FFAA40',
-              fontSize: '0.82rem',
+              fontSize: 'clamp(0.72rem, 2vw, 0.82rem)',
               fontWeight: '800',
-              letterSpacing: '0.22em',
+              letterSpacing: '0.18em',
               textTransform: 'uppercase',
               marginBottom: '1rem',
             }}
           >
-            <Calendar size={15} />
-            <span>ACT 02 // CHRONICLES • THE 3 NIGHTS</span>
+            <Calendar size={15} style={{ flexShrink: 0 }} />
+            <span>ACT 02 // CHRONICLES • THE 3 DAYS</span>
           </div>
 
           <h2
             style={{
               fontFamily: "'Cinzel Decorative', 'Anton', serif",
-              fontSize: 'clamp(2.6rem, 6vw, 4.8rem)',
+              fontSize: 'clamp(2.2rem, 6vw, 4.8rem)',
               fontWeight: '900',
               color: '#FFFFFF',
               textTransform: 'uppercase',
@@ -449,11 +459,11 @@ export default function FestivalMovieJourney() {
               textShadow: '0 4px 20px rgba(0,0,0,0.95)',
             }}
           >
-            THE THREE NIGHTS OF <span style={{ color: '#FF7A32' }}>RECKONING</span>
+            THE THREE DAYS OF <span style={{ color: '#FF7A32' }}>RECKONING</span>
           </h2>
 
-          <p style={{ color: '#B8A8AB', fontSize: '1.1rem', maxWidth: '720px', margin: '0 auto' }}>
-            Three distinct chapters. Three unforgettable spectacles under the Sitapura midnight sky.
+          <p style={{ color: '#B8A8AB', fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)', maxWidth: '720px', margin: '0 auto', lineHeight: '1.6' }}>
+            Three distinct chapters. Three unforgettable days of sports, culture, and glory under the Sitapura sky.
           </p>
           </div>
 
@@ -463,8 +473,8 @@ export default function FestivalMovieJourney() {
               display: 'flex',
               justifyContent: 'center',
               flexWrap: 'wrap',
-              gap: '10px',
-              marginBottom: '2.5rem',
+              gap: 'clamp(6px, 1.5vw, 10px)',
+              marginBottom: '2rem',
             }}
           >
             {nights.map((n, idx) => (
@@ -472,19 +482,19 @@ export default function FestivalMovieJourney() {
                 <button
                   onClick={() => setActiveNightTab(idx)}
                   style={{
-                    padding: '10px 22px',
+                    padding: '8px clamp(12px, 3vw, 22px)',
                     borderRadius: '30px',
                     background: activeNightTab === idx ? `${n.color}25` : 'rgba(255, 255, 255, 0.04)',
                     border: `1.5px solid ${activeNightTab === idx ? n.color : 'rgba(255, 255, 255, 0.14)'}`,
                     color: activeNightTab === idx ? '#FFFFFF' : '#B8A8AB',
                     fontFamily: "'Cinzel', Georgia, serif",
-                    fontSize: '0.88rem',
+                    fontSize: 'clamp(0.75rem, 2vw, 0.88rem)',
                     fontWeight: '800',
-                    letterSpacing: '0.12em',
+                    letterSpacing: '0.1em',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px',
+                    gap: '6px',
                     boxShadow: activeNightTab === idx ? `0 0 24px ${n.color}55` : 'none',
                     transition: 'all 0.3s ease',
                   }}
@@ -496,10 +506,11 @@ export default function FestivalMovieJourney() {
                       borderRadius: '50%',
                       backgroundColor: n.color,
                       boxShadow: `0 0 8px ${n.color}`,
+                      flexShrink: 0,
                     }}
                   />
                   <span>{n.night}</span>
-                  <span style={{ opacity: 0.65, fontSize: '0.75rem' }}>({n.date})</span>
+                  <span style={{ opacity: 0.65, fontSize: '0.72rem' }}>({n.date})</span>
                 </button>
               </Magnetic>
             ))}
@@ -516,7 +527,7 @@ export default function FestivalMovieJourney() {
                 style={{
                   maxWidth: '1020px',
                   margin: '0 auto',
-                  padding: 'clamp(1.5rem, 4vw, 3rem)',
+                  padding: 'clamp(1.2rem, 3.5vw, 2.5rem)',
                   border: `1.5px solid ${cur.color}88`,
                   background: 'radial-gradient(circle at 40% 30%, rgba(32, 12, 18, 0.95), rgba(8, 4, 6, 0.98))',
                   boxShadow: `0 15px 50px rgba(0,0,0,0.95), 0 0 45px ${cur.color}35`,
@@ -528,10 +539,10 @@ export default function FestivalMovieJourney() {
                     alignItems: 'flex-start',
                     justifyContent: 'space-between',
                     flexWrap: 'wrap',
-                    gap: '1.5rem',
-                    marginBottom: '1.5rem',
+                    gap: '1rem',
+                    marginBottom: '1.25rem',
                     borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                    paddingBottom: '1.25rem',
+                    paddingBottom: '1rem',
                   }}
                 >
                   <div>
@@ -539,8 +550,8 @@ export default function FestivalMovieJourney() {
                       style={{
                         color: cur.color,
                         fontWeight: '800',
-                        fontSize: '0.85rem',
-                        letterSpacing: '0.2em',
+                        fontSize: 'clamp(0.75rem, 1.8vw, 0.85rem)',
+                        letterSpacing: '0.18em',
                         marginBottom: '4px',
                       }}
                     >
@@ -549,7 +560,7 @@ export default function FestivalMovieJourney() {
                     <h3
                       style={{
                         fontFamily: "'Cinzel Decorative', 'Anton', serif",
-                        fontSize: 'clamp(1.8rem, 4vw, 3rem)',
+                        fontSize: 'clamp(1.6rem, 4vw, 3rem)',
                         color: '#FFFFFF',
                         letterSpacing: '0.06em',
                         textTransform: 'uppercase',
@@ -560,13 +571,13 @@ export default function FestivalMovieJourney() {
                     </h3>
                   </div>
 
-                  <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#B8A8AB' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'flex-end' }}>
-                      <Clock size={16} style={{ color: cur.color }} />
+                  <div style={{ textAlign: 'left', fontSize: 'clamp(0.78rem, 2vw, 0.85rem)', color: '#B8A8AB' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Clock size={16} style={{ color: cur.color, flexShrink: 0 }} />
                       <span style={{ fontWeight: '700', color: '#FFFFFF' }}>{cur.time}</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
-                      <MapPin size={16} style={{ color: cur.color }} />
+                      <MapPin size={16} style={{ color: cur.color, flexShrink: 0 }} />
                       <span>{cur.venue}</span>
                     </div>
                   </div>
@@ -574,33 +585,36 @@ export default function FestivalMovieJourney() {
 
                 <p
                   style={{
-                    fontSize: '1.1rem',
+                    fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
                     color: '#E0D4D6',
-                    lineHeight: '1.7',
-                    marginBottom: '2rem',
+                    lineHeight: '1.65',
+                    marginBottom: '1.5rem',
                   }}
                 >
                   {cur.summary}
                 </p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                   {cur.highlights.map((h, i) => (
                     <div
                       key={i}
                       style={{
                         display: 'inline-flex',
-                        alignItems: 'center',
+                        alignItems: 'flex-start',
                         gap: '8px',
-                        padding: '8px 16px',
-                        borderRadius: '20px',
+                        padding: '7px 12px',
+                        borderRadius: '16px',
                         background: 'rgba(255, 255, 255, 0.05)',
                         border: `1px solid ${cur.color}55`,
-                        fontSize: '0.88rem',
+                        fontSize: 'clamp(0.76rem, 1.8vw, 0.86rem)',
                         fontWeight: '700',
                         color: '#FFFFFF',
+                        maxWidth: '100%',
+                        lineHeight: '1.4',
+                        wordBreak: 'break-word',
                       }}
                     >
-                      <Sparkles size={14} style={{ color: cur.color }} />
+                      <Sparkles size={14} style={{ color: cur.color, flexShrink: 0, marginTop: '2px' }} />
                       <span>{h}</span>
                     </div>
                   ))}
@@ -619,7 +633,7 @@ export default function FestivalMovieJourney() {
         id="act-03"
         style={{
           position: 'relative',
-          padding: '6rem 1.5rem',
+          padding: 'clamp(3rem, 7vw, 6rem) clamp(1rem, 3.5vw, 1.5rem)',
           borderBottom: '1px solid rgba(255, 170, 64, 0.15)',
           background: 'radial-gradient(ellipse at 50% 50%, rgba(157, 78, 221, 0.1) 0%, transparent 70%)',
         }}
@@ -630,26 +644,26 @@ export default function FestivalMovieJourney() {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '8px',
-              padding: '6px 20px',
+              padding: '6px clamp(12px, 3vw, 20px)',
               borderRadius: '30px',
               background: 'rgba(229, 9, 20, 0.15)',
               border: '1px solid rgba(255, 170, 64, 0.45)',
               color: '#FFAA40',
-              fontSize: '0.82rem',
+              fontSize: 'clamp(0.72rem, 2vw, 0.82rem)',
               fontWeight: '800',
-              letterSpacing: '0.22em',
+              letterSpacing: '0.18em',
               textTransform: 'uppercase',
               marginBottom: '1rem',
             }}
           >
-            <Trophy size={15} />
+            <Trophy size={15} style={{ flexShrink: 0 }} />
             <span>ACT 03 // FACTIONS • INTER-HOUSE BLOOD RIVALRY</span>
           </div>
 
           <h2
             style={{
               fontFamily: "'Cinzel Decorative', 'Anton', serif",
-              fontSize: 'clamp(2.6rem, 6vw, 4.8rem)',
+              fontSize: 'clamp(2.2rem, 6vw, 4.8rem)',
               fontWeight: '900',
               color: '#FFFFFF',
               textTransform: 'uppercase',
@@ -664,11 +678,11 @@ export default function FestivalMovieJourney() {
           <p
             style={{
               fontFamily: "'DM Sans', sans-serif",
-              fontSize: '1.1rem',
+              fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)',
               color: '#B8A8AB',
               maxWidth: '720px',
               lineHeight: '1.6',
-              margin: '0 auto 3rem auto',
+              margin: '0 auto 2.5rem auto',
             }}
           >
             Hostellers turn competitors. Friendly rooms become battlefields. Points tally continuously across Sports,
@@ -679,8 +693,8 @@ export default function FestivalMovieJourney() {
           <FocusCards
             cards={houses}
             style={{
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '1rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(clamp(135px, 42vw, 220px), 1fr))',
+              gap: 'clamp(0.6rem, 2vw, 1rem)',
               maxWidth: '1200px',
               margin: '0 auto 2.5rem auto',
             }}
@@ -691,7 +705,7 @@ export default function FestivalMovieJourney() {
                 glowRadius={240}
                 tilt={true}
                 style={{
-                  padding: '1.6rem 1rem',
+                  padding: 'clamp(1.1rem, 2.5vw, 1.6rem) clamp(0.5rem, 2vw, 1rem)',
                   textAlign: 'center',
                   border: isHovered ? `1.5px solid ${h.color}` : `1px solid ${h.color}44`,
                   background: isHovered ? 'radial-gradient(circle, rgba(28, 12, 18, 0.98), rgba(8, 4, 6, 0.98))' : 'radial-gradient(circle, rgba(16, 8, 12, 0.9), rgba(6, 3, 5, 0.95))',
@@ -701,12 +715,17 @@ export default function FestivalMovieJourney() {
                   alignItems: 'center',
                 }}
               >
-                <FloatingElements duration={3.5 + idx * 0.3} distance={5} rotate={2}>
+                <FloatingElements duration={3.5 + idx * 0.3} distance={4} rotate={0}>
                   <div
                     style={{
-                      fontSize: '2.2rem',
-                      marginBottom: '6px',
-                      filter: `drop-shadow(0 0 12px ${h.color})`,
+                      fontFamily: "'Cinzel Decorative', 'Anton', serif",
+                      fontSize: 'clamp(1.8rem, 5vw, 2.5rem)',
+                      fontWeight: '900',
+                      color: h.color,
+                      marginBottom: '4px',
+                      lineHeight: '1',
+                      letterSpacing: '0.06em',
+                      filter: `drop-shadow(0 0 16px ${h.color})`,
                     }}
                   >
                     {h.sigil}
@@ -716,8 +735,8 @@ export default function FestivalMovieJourney() {
                 <h4
                   style={{
                     fontFamily: "'Cinzel', Georgia, serif",
-                    fontSize: '1.2rem',
-                    fontWeight: '900',
+                    fontSize: 'clamp(0.88rem, 2vw, 1.05rem)',
+                    fontWeight: '800',
                     color: '#FFFFFF',
                     letterSpacing: '0.08em',
                     marginBottom: '2px',
@@ -730,18 +749,18 @@ export default function FestivalMovieJourney() {
 
                 <span
                   style={{
-                    fontSize: '0.72rem',
+                    fontSize: 'clamp(0.62rem, 1.6vw, 0.72rem)',
                     fontWeight: '800',
-                    letterSpacing: '0.15em',
+                    letterSpacing: '0.14em',
                     color: h.color,
                     textTransform: 'uppercase',
-                    marginBottom: '8px',
+                    marginBottom: '6px',
                   }}
                 >
                   {h.tag}
                 </span>
 
-                <p style={{ fontSize: '0.8rem', color: '#B8A8AB', lineHeight: '1.3' }}>
+                <p style={{ fontSize: 'clamp(0.72rem, 1.6vw, 0.8rem)', color: '#B8A8AB', lineHeight: '1.35' }}>
                   "{h.motto}"
                 </p>
               </CardSpotlight>
@@ -756,123 +775,6 @@ export default function FestivalMovieJourney() {
             </MovingBorder>
           </Magnetic>
         </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* ACT 04: THE FINAL ARENA & REGISTRATION GATEWAY                           */}
-      {/* ========================================================================= */}
-      <div
-        ref={actRefs[3]}
-        id="act-04"
-        style={{
-          position: 'relative',
-          padding: '4rem 1.5rem 6rem',
-          background: 'radial-gradient(ellipse at 50% 50%, rgba(229, 9, 20, 0.14) 0%, transparent 65%)',
-        }}
-      >
-        <Lamp color="#FF2B3C" secondaryColor="#FFAA40">
-          <div style={{ maxWidth: '1020px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 10 }}>
-            <FloatingElements duration={4} distance={4} rotate={1}>
-              <div
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '6px 20px',
-                  borderRadius: '30px',
-                  background: 'rgba(229, 9, 20, 0.16)',
-                  border: '1px solid rgba(255, 170, 64, 0.5)',
-                  color: '#FFAA40',
-                  fontSize: '0.82rem',
-                  fontWeight: '800',
-                  letterSpacing: '0.22em',
-                  textTransform: 'uppercase',
-                  marginBottom: '1.25rem',
-                }}
-              >
-                <Sparkles size={15} />
-                <span>ACT 04 // THE FINAL ARENA • REGISTRATION CODEX</span>
-              </div>
-            </FloatingElements>
-
-            <h2
-              style={{
-                fontFamily: "'Cinzel Decorative', 'Anton', serif",
-                fontSize: 'clamp(2.8rem, 6.5vw, 5.2rem)',
-                fontWeight: '900',
-                color: '#FFFFFF',
-                textTransform: 'uppercase',
-                letterSpacing: '0.06em',
-                lineHeight: '1.05',
-                marginBottom: '1.25rem',
-                textShadow: '0 4px 25px rgba(0,0,0,0.95), 0 0 50px rgba(255, 43, 60, 0.65)',
-              }}
-            >
-              WILL YOU SPECTATE, OR WILL YOU{' '}
-              <ShinyText color="#FF2B3C" shimmerColor="#FFEAA7" speed={3}>
-                CONQUER?
-              </ShinyText>
-            </h2>
-
-            <p
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 'clamp(1.05rem, 1.8vw, 1.3rem)',
-                color: '#E0D4D6',
-                maxWidth: '750px',
-                lineHeight: '1.7',
-                margin: '0 auto 3rem auto',
-              }}
-            >
-              Select your House to unlock the dedicated registration gateway for Sports Championships,
-              LAN Gaming Arenas, and Gothic Cultural Stages.
-            </p>
-
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '1.25rem',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <Magnetic strength={0.25}>
-                <MovingBorder duration={2800} color="#FF2B3C" borderRadius="30px">
-                  <Button
-                    to="#houses"
-                    variant="primary"
-                    size="xl"
-                    icon={<Shield size={20} />}
-                    style={{
-                      fontSize: '1.1rem',
-                      padding: '16px 38px',
-                      boxShadow: '0 0 40px rgba(255, 43, 60, 0.65), 0 8px 30px rgba(0,0,0,0.85)',
-                    }}
-                  >
-                    SELECT YOUR HOUSE & REGISTER
-                  </Button>
-                </MovingBorder>
-              </Magnetic>
-
-              <Magnetic strength={0.25}>
-                <Button
-                  to="#leaderboard"
-                  variant="outline"
-                  size="xl"
-                  icon={<Trophy size={20} />}
-                  style={{
-                    fontSize: '1.1rem',
-                    padding: '16px 36px',
-                    borderColor: 'rgba(255, 170, 64, 0.45)',
-                  }}
-                >
-                  VIEW LIVE STANDINGS
-                </Button>
-              </Magnetic>
-            </div>
-          </div>
-        </Lamp>
       </div>
     </section>
   );

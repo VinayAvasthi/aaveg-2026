@@ -197,15 +197,13 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                       backdropFilter: 'blur(10px)',
                     }}
                   >
-                    <span style={{ fontSize: 'clamp(1rem, 2vw, 1.4rem)' }}>{house.sigil}</span>
                     <span
                       style={{
-                        fontSize: '0.62rem',
-                        fontFamily: "'Cinzel', Georgia, serif",
-                        fontWeight: '800',
+                        fontSize: 'clamp(0.95rem, 2vw, 1.25rem)',
+                        fontFamily: "'Cinzel Decorative', 'Anton', serif",
+                        fontWeight: '900',
                         letterSpacing: '0.08em',
-                        color: isActive ? '#FFFFFF' : 'rgba(245, 234, 235, 0.75)',
-                        marginTop: '1px',
+                        color: isActive ? '#FFFFFF' : house.color,
                       }}
                     >
                       H{house.number}
@@ -250,16 +248,20 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                 backdropFilter: 'blur(20px)',
               }}
             >
-              <FloatingElements duration={3} distance={6} rotate={3}>
+              <FloatingElements duration={3} distance={5} rotate={0}>
                 <div
                   style={{
-                    fontSize: 'clamp(2.4rem, 5vw, 3.4rem)',
+                    fontFamily: "'Cinzel Decorative', 'Anton', serif",
+                    fontSize: 'clamp(2.6rem, 5.5vw, 3.8rem)',
+                    fontWeight: '900',
                     lineHeight: '1',
-                    filter: `drop-shadow(0 0 16px ${currentHouse.color})`,
+                    color: currentHouse.color,
+                    filter: `drop-shadow(0 0 20px ${currentHouse.color})`,
                     marginBottom: '6px',
+                    letterSpacing: '0.06em',
                   }}
                 >
-                  {currentHouse.sigil}
+                  H{currentHouse.number}
                 </div>
               </FloatingElements>
 

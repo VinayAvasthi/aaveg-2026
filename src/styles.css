@@ -226,3 +226,14 @@ a{color:inherit}
     bottom: max(20px, env(safe-area-inset-bottom, 20px));
   }
 }
+
+/* Mobile & Touch Device Optimizations */
+@media (max-width: 768px) {
+  button, a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .movie-directors-hud {
+    padding: 0.5rem 0.75rem !important;
+  }
+}

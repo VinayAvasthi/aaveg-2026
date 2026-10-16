@@ -311,25 +311,24 @@ export default function HouseSelection({ onBack }) {
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
-                    gap: '10px',
-                    padding: '8px 20px',
+                    justifyContent: 'center',
+                    padding: '8px 22px',
                     borderRadius: '25px',
                     background: 'rgba(20, 10, 15, 0.95)',
                     border: `1.5px solid ${selectedHouse.color}`,
                     boxShadow: `0 0 25px ${selectedHouse.accentGlow}`,
                   }}
                 >
-                  <span style={{ fontSize: '1.3rem' }}>{selectedHouse.sigil}</span>
                   <span
                     style={{
-                      fontFamily: "'Cinzel', Georgia, serif",
-                      fontSize: '0.95rem',
+                      fontFamily: "'Cinzel Decorative', 'Anton', serif",
+                      fontSize: '1.05rem',
                       fontWeight: '900',
-                      color: '#FFFFFF',
-                      letterSpacing: '0.1em',
+                      color: selectedHouse.color,
+                      letterSpacing: '0.12em',
                     }}
                   >
-                    {selectedHouse.name.toUpperCase()}
+                    H{selectedHouse.number}
                   </span>
                 </div>
               </div>

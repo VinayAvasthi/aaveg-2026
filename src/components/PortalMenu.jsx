@@ -22,7 +22,7 @@ const ITEMS = [
   },
   {
     num: '03',
-    title: '4-ACT CINEMATIC CHRONICLE',
+    title: 'CINEMATIC CHRONICLE',
     desc: 'Immerse in the haunted story, from opening hook to final act.',
     cta: 'EXPLORE →',
     href: '#chronicle',

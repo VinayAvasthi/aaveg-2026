@@ -99,8 +99,10 @@ export default function Button({
   };
 
   if (href) {
+    const isExternal = typeof href === 'string' && (href.startsWith('http') || props.target === '_blank');
+    const rel = props.rel || (isExternal ? 'noopener noreferrer' : undefined);
     return (
-      <a href={href} className={`aaveg-btn ${className}`} style={baseStyle} onClick={handleClick} {...props}>
+      <a href={href} className={`aaveg-btn ${className}`} style={baseStyle} onClick={handleClick} rel={rel} {...props}>
         {icon && <span style={{ display: 'inline-flex', alignItems: 'center' }}>{icon}</span>}
         <span>{children}</span>
       </a>

@@ -259,7 +259,7 @@ export function createRealisticStemGeometry(scale = 1.0) {
   const pos = geom.attributes.position;
   for (let i = 0; i < pos.count; i++) {
     const y = pos.getY(i);
-    const progress = (y + scale * 0.21) / (scale * 0.42);
+    const progress = Math.max(0, Math.min(1, (y + scale * 0.21) / (scale * 0.42)));
     const bendZ = -Math.pow(progress, 1.6) * (scale * 0.16);
     const bendX = Math.sin(progress * Math.PI) * (scale * 0.04);
     if (progress < 0.25) {
@@ -270,7 +270,10 @@ export function createRealisticStemGeometry(scale = 1.0) {
     pos.setX(i, pos.getX(i) + bendX);
     pos.setZ(i, pos.getZ(i) + bendZ);
   }
+  pos.needsUpdate = true;
   geom.computeVertexNormals();
+  geom.computeBoundingBox();
+  geom.computeBoundingSphere();
   return geom;
 }
 

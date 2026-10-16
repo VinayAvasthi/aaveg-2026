@@ -153,6 +153,7 @@ export default function CircularHouseSelector({ onSelectHouse }) {
               transform: `rotate(${rotationAngle}deg)`,
               transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
               transformOrigin: 'center center',
+              pointerEvents: 'none',
             }}
           >
             {HOUSES.map((house, idx) => {
@@ -175,6 +176,7 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                     zIndex: isActive ? 20 : 10,
                     cursor: 'pointer',
                     touchAction: 'manipulation',
+                    pointerEvents: 'auto',
                   }}
                 >
                   <div
@@ -244,20 +246,20 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 textAlign: 'center',
-                padding: '1.5rem',
+                padding: 'clamp(0.6rem, 2.5vw, 1.4rem)',
                 backdropFilter: 'blur(20px)',
               }}
             >
-              <FloatingElements duration={3} distance={5} rotate={0}>
+              <FloatingElements duration={3} distance={4} rotate={0}>
                 <div
                   style={{
                     fontFamily: "'Cinzel Decorative', 'Anton', serif",
-                    fontSize: 'clamp(2.6rem, 5.5vw, 3.8rem)',
+                    fontSize: 'clamp(2rem, 4.8vw, 3.6rem)',
                     fontWeight: '900',
                     lineHeight: '1',
                     color: currentHouse.color,
                     filter: `drop-shadow(0 0 20px ${currentHouse.color})`,
-                    marginBottom: '6px',
+                    marginBottom: '2px',
                     letterSpacing: '0.06em',
                   }}
                 >
@@ -268,12 +270,12 @@ export default function CircularHouseSelector({ onSelectHouse }) {
               <h3
                 style={{
                   fontFamily: "'Cinzel Decorative', 'Anton', serif",
-                  fontSize: 'clamp(1.5rem, 3.2vw, 2.2rem)',
+                  fontSize: 'clamp(1.15rem, 2.8vw, 2rem)',
                   fontWeight: '900',
                   color: '#FFFFFF',
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  marginBottom: '4px',
+                  marginBottom: '10px',
                   textShadow: '0 2px 10px rgba(0,0,0,0.9)',
                 }}
               >
@@ -282,35 +284,23 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                 </ShinyText>
               </h3>
 
-              <p
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: 'clamp(0.72rem, 1.4vw, 0.85rem)',
-                  fontWeight: '600',
-                  color: currentHouse.color,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  lineHeight: '1.3',
-                  maxWidth: '220px',
-                  marginBottom: '14px',
-                }}
-              >
-                "{currentHouse.motto}"
-              </p>
-
               <Magnetic strength={0.25}>
                 <button
                   onClick={handleHouseConfirm}
+                  onTouchEnd={(e) => {
+                    e.stopPropagation();
+                    handleHouseConfirm();
+                  }}
                   style={{
-                    padding: '8px 20px',
+                    padding: 'clamp(6px, 1.8vw, 10px) clamp(14px, 3.2vw, 20px)',
                     borderRadius: '25px',
                     background: currentHouse.color,
                     border: '1px solid #FFFFFF',
                     color: '#FFFFFF',
                     fontFamily: "'DM Sans', sans-serif",
-                    fontSize: '0.78rem',
+                    fontSize: 'clamp(0.72rem, 1.8vw, 0.8rem)',
                     fontWeight: '800',
-                    letterSpacing: '0.12em',
+                    letterSpacing: '0.1em',
                     textTransform: 'uppercase',
                     cursor: 'pointer',
                     display: 'inline-flex',
@@ -318,6 +308,8 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                     gap: '6px',
                     boxShadow: `0 4px 20px ${currentHouse.accentGlow}`,
                     transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    touchAction: 'manipulation',
+                    whiteSpace: 'nowrap',
                   }}
                   onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
                   onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}

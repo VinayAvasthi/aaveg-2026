@@ -786,20 +786,23 @@ export default function FestivalMovieJourney() {
         </div>
       </div>
         {/* Footer */}
-        <footer style={{
-          marginTop: '2rem',
-          padding: '2rem 1rem',
-          background: 'rgba(0,0,0,0.85)',
-          color: '#FFFFFF',
-          textAlign: 'center',
-          borderTop: '1px solid rgba(255, 170, 64, 0.25)',
-        }}>
+        <footer
+          style={{
+            marginTop: '2rem',
+            padding: '2rem 1rem',
+            background: 'rgba(0,0,0,0.85)',
+            color: '#FFFFFF',
+            textAlign: 'center',
+            borderTop: '1px solid rgba(255, 170, 64, 0.25)',
+          }}
+        >
           <div style={{ marginBottom: '1rem' }}>
             <a href="https://aaveg-2026-two.vercel.app/#chronicle" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Chronicle</a>
             <a href="https://aaveg-2026-two.vercel.app/#houses" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Houses</a>
             <a href="https://aaveg-2026-two.vercel.app/#leaderboard" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Leaderboard</a>
           </div>
-          <h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Developed by:</h3>
+          <p style={{ margin: '0.5rem 0', color: '#FFAA40' }}>H1 • H2 • H3 • H4 • H5 • H6 • H7 • H8</p>
+<h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Developed by:</h3>
           <div style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>
             <p style={{ margin: '0.2rem 0' }}>Divyansh Yadav (CSE)</p>
             <p style={{ margin: '0.2rem 0' }}>Aryan Gour (CSE)</p>

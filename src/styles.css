@@ -229,11 +229,20 @@ a{color:inherit}
 
 /* Mobile & Touch Device Optimizations */
 @media (max-width: 768px) {
+  .hero {
+    height: 300vh;
+  }
+  .grain {
+    display: none !important;
+  }
   button, a {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
   }
   .movie-directors-hud {
     padding: 0.5rem 0.75rem !important;
+  }
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }

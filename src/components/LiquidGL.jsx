@@ -3,6 +3,23 @@ import { useEffect, useRef } from 'react';
 // WebGL Liquid Glass Shader Component (LiquidGL)
 // Provides authentic chromatic dispersion, fluid wave refraction, specular highlights, and Fresnel rim glow
 export default function LiquidGL({ imageSrc, size = 110, className = '' }) {
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    return (
+      <div
+        className={className}
+        style={{
+          width: size,
+          height: size,
+          borderRadius: '50%',
+          backgroundImage: `url(${imageSrc})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          boxShadow: '0 4px 18px rgba(0,0,0,0.6)',
+        }}
+      />
+    );
+  }
+
   const canvasRef = useRef(null);
   const mouseRef = useRef({ x: 0.5, y: 0.5, targetX: 0.5, targetY: 0.5, hover: 0, targetHover: 0 });
 

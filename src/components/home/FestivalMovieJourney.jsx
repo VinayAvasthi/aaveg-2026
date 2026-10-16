@@ -22,7 +22,7 @@ import GridBackground from '../ui/GridBackground';
 export default function FestivalMovieJourney() {
   const [activeAct, setActiveAct] = useState(0);
   const [activeNightTab, setActiveNightTab] = useState(0);
-  const [movieProgress, setMovieProgress] = useState(0);
+  const scrubBarRef = useRef(null);
 
   const act0Ref = useRef(null);
   const act1Ref = useRef(null);
@@ -102,25 +102,33 @@ export default function FestivalMovieJourney() {
 
   // Track active act and journey scroll progress
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      const sectionEl = document.getElementById('festival-movie');
-      if (sectionEl) {
-        const rect = sectionEl.getBoundingClientRect();
-        const totalHeight = sectionEl.offsetHeight - window.innerHeight;
-        if (totalHeight > 0) {
-          const currentScrolled = -rect.top;
-          const pct = Math.min(100, Math.max(0, (currentScrolled / totalHeight) * 100));
-          setMovieProgress(pct);
-        }
-      }
-
-      actRefs.forEach((ref, index) => {
-        if (ref.current) {
-          const rect = ref.current.getBoundingClientRect();
-          if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.2) {
-            setActiveAct(index);
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const sectionEl = document.getElementById('festival-movie');
+        if (sectionEl) {
+          const rect = sectionEl.getBoundingClientRect();
+          const totalHeight = sectionEl.offsetHeight - window.innerHeight;
+          if (totalHeight > 0) {
+            const currentScrolled = -rect.top;
+            const pct = Math.min(100, Math.max(0, (currentScrolled / totalHeight) * 100));
+            if (scrubBarRef.current) {
+              scrubBarRef.current.style.width = `${pct}%`;
+            }
           }
         }
+
+        actRefs.forEach((ref, index) => {
+          if (ref.current) {
+            const rect = ref.current.getBoundingClientRect();
+            if (rect.top <= window.innerHeight * 0.45 && rect.bottom >= window.innerHeight * 0.2) {
+              setActiveAct((prev) => (prev !== index ? index : prev));
+            }
+          }
+        });
       });
     };
 
@@ -252,9 +260,10 @@ export default function FestivalMovieJourney() {
           }}
         >
           <div
+            ref={scrubBarRef}
             style={{
               height: '100%',
-              width: `${movieProgress}%`,
+              width: '0%',
               background: 'linear-gradient(90deg, #FF2B3C, #FFAA40)',
               boxShadow: '0 0 10px #FF2B3C',
               transition: 'width 0.15s ease-out',

@@ -3,6 +3,10 @@ import * as THREE from 'three';
 import { createRealisticPumpkinModel } from '../../utils/realisticPumpkin';
 
 export default function ThreeScrollExperience() {
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    return null;
+  }
+
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
   const mouseRef = useRef({ x: 0, y: 0, targetX: 0, targetY: 0 });

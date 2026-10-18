@@ -5,17 +5,21 @@ import Hero from './components/Hero.jsx';
 import MovieSagaPage from './pages/MovieSagaPage.jsx';
 import HouseSelection from './pages/HouseSelection.jsx';
 import LeaderboardPage from './pages/LeaderboardPage.jsx';
+import SponsorsPage from './pages/SponsorsPage.jsx';
 
 function getRouteFromHash() {
   const hash = typeof window !== 'undefined' ? window.location.hash.replace(/^#\/?/, '').toLowerCase() : '';
   if (hash === 'chronicle' || hash === 'movie-saga' || hash === 'saga') {
     return 'chronicle';
   }
-  if (hash === 'houses' || hash === 'house' || hash.startsWith('house-')) {
+  if (hash === 'houses' || hash === 'house' || hash.startsWith('house-') || /^h[1-8]$/.test(hash)) {
     return 'houses';
   }
   if (hash === 'leaderboard' || hash === 'standings' || hash === 'rankings') {
     return 'leaderboard';
+  }
+  if (hash === 'sponsors' || hash === 'sponsor' || hash === 'sponse') {
+    return 'sponsors';
   }
   return 'home';
 }
@@ -57,6 +61,8 @@ export default function App() {
           <HouseSelection onBack={handleBackToHome} />
         ) : route === 'leaderboard' ? (
           <LeaderboardPage onBack={handleBackToHome} />
+        ) : route === 'sponsors' ? (
+          <SponsorsPage onBack={handleBackToHome} />
         ) : (
           <Hero reduced={reduced} />
         )}

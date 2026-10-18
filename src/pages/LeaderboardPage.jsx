@@ -4,6 +4,7 @@ import GridBackground from '../components/ui/GridBackground';
 import ShinyText from '../components/ui/ShinyText';
 import Magnetic from '../components/ui/Magnetic';
 import Button from '../components/common/Button';
+import Footer from '../components/common/Footer';
 
 export default function LeaderboardPage({ onBack }) {
   const handleBackToHome = (e) => {
@@ -136,6 +137,7 @@ export default function LeaderboardPage({ onBack }) {
       </div>
 
       <HostelWars />
+      <Footer />
     </div>
   );
 }

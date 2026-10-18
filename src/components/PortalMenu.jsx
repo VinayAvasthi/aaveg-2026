@@ -18,7 +18,7 @@ const ITEMS = [
     cta: 'VIEW →',
     href: '#leaderboard',
     img: '/assets/portal_trophy.jpg',
-    baseAngle: (5 * Math.PI) / 3, // Starts at ~2 o'clock (right)
+    baseAngle: (3 * Math.PI) / 2, // Starts at 12 o'clock (top)
   },
   {
     num: '03',
@@ -27,6 +27,15 @@ const ITEMS = [
     cta: 'EXPLORE →',
     href: '#chronicle',
     img: '/assets/portal_book.jpg',
+    baseAngle: 0, // Starts at 3 o'clock (right)
+  },
+  {
+    num: '04',
+    title: 'SPONSORS',
+    desc: 'Official gifting partner and brand collaborations for AAVEG 2026.',
+    cta: 'DISCOVER →',
+    href: '#sponsors',
+    img: '/assets/portal_sponsor.jpg',
     baseAngle: Math.PI / 2, // Starts at 6 o'clock (bottom)
   },
 ];
@@ -41,8 +50,8 @@ export default function PortalMenu({ visible }) {
   const animState = useRef({
     orbitAngle: 0,
     entryProgress: 0,
-    nodeScales: [0, 0, 0],
-    nodeOpacities: [0, 0, 0],
+    nodeScales: ITEMS.map(() => 0),
+    nodeOpacities: ITEMS.map(() => 0),
   });
   const rafRef = useRef(null);
 
@@ -51,19 +60,19 @@ export default function PortalMenu({ visible }) {
     const w = typeof window !== 'undefined' ? window.innerWidth : 1200;
     const h = typeof window !== 'undefined' ? window.innerHeight : 800;
     const minDim = Math.min(w, h);
-    if (w < 480) return Math.min(115, Math.floor(minDim * 0.28));
-    if (w < 768) return 145;
-    if (w < 1024) return 195;
-    return Math.min(300, Math.floor(minDim * 0.32));
+    if (w < 480) return Math.min(120, Math.floor(minDim * 0.30));
+    if (w < 768) return 155;
+    if (w < 1024) return 210;
+    return Math.min(310, Math.floor(minDim * 0.35));
   }, []);
 
   // Responsive card size
   const getCardSize = useCallback(() => {
     const w = typeof window !== 'undefined' ? window.innerWidth : 1200;
-    if (w < 480) return 130;
-    if (w < 768) return 165;
-    if (w < 1024) return 220;
-    return 275;
+    if (w < 480) return 110;
+    if (w < 768) return 145;
+    if (w < 1024) return 195;
+    return 245;
   }, []);
 
   // Continuous circular motion animation loop

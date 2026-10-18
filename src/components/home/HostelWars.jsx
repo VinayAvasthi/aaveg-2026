@@ -41,12 +41,20 @@ export default function HostelWars() {
   const sortedHouses = useMemo(() => {
     return HOUSES.map((h) => ({
       ...h,
-      points: HOUSE_POINTS[h.id] ?? 1000,
-    })).sort((a, b) => b.points - a.points);
+      points: HOUSE_POINTS[h.id] ?? 0,
+    })).sort((a, b) => {
+      if (b.points !== a.points) return b.points - a.points;
+      return a.number - b.number;
+    });
   }, []);
 
+  const allPointsZero = useMemo(() => {
+    return sortedHouses.every((h) => h.points === 0);
+  }, [sortedHouses]);
+
   const maxPoints = useMemo(() => {
-    return Math.max(...sortedHouses.map((h) => h.points), 100);
+    const max = Math.max(...sortedHouses.map((h) => h.points), 0);
+    return max > 0 ? max : 100;
   }, [sortedHouses]);
 
   return (
@@ -147,25 +155,49 @@ export default function HostelWars() {
             marginBottom: '3rem',
           }}
         >
-          {sortedHouses.slice(0, 3).map((house, idx) => {
-            const rank = idx + 1;
-            const rankColor = rank === 1 ? '#FFD166' : rank === 2 ? '#E2E8F0' : '#CD7F32';
-            const rankTitle =
-              rank === 1 ? '1ST PLACE • REIGNING LEADER' : rank === 2 ? '2ND PLACE • CONTENDER' : '3RD PLACE • VANGUARD';
-
-            return (
+          {allPointsZero ? (
+            [
+              {
+                rank: 1,
+                rankTitle: '1ST PLACE',
+                rankColor: '#FFD166',
+                icon: <Crown size={24} style={{ color: '#FFD166' }} />,
+                title: 'COMING SOON',
+                subtitle: 'Crown Unclaimed',
+                desc: 'Leader standing activates once the opening arena battle begins.',
+              },
+              {
+                rank: 2,
+                rankTitle: '2ND PLACE',
+                rankColor: '#E2E8F0',
+                icon: <Shield size={24} style={{ color: '#E2E8F0' }} />,
+                title: 'COMING SOON',
+                subtitle: 'Contender Slot',
+                desc: 'Second place standing activates once arena matches commence.',
+              },
+              {
+                rank: 3,
+                rankTitle: '3RD PLACE',
+                rankColor: '#CD7F32',
+                icon: <Trophy size={24} style={{ color: '#CD7F32' }} />,
+                title: 'COMING SOON',
+                subtitle: 'Vanguard Slot',
+                desc: 'Third place standing activates once arena matches commence.',
+              },
+            ].map((slot) => (
               <div
-                key={house.id}
+                key={slot.rank}
                 style={{
                   background: 'radial-gradient(circle at 40% 30%, rgba(30, 12, 18, 0.95), rgba(8, 4, 6, 0.98))',
-                  border: `1.5px solid ${rank === 1 ? 'rgba(255, 209, 102, 0.7)' : 'rgba(255, 170, 64, 0.3)'}`,
+                  border: `1.5px solid ${slot.rank === 1 ? 'rgba(255, 209, 102, 0.6)' : 'rgba(255, 170, 64, 0.3)'}`,
                   borderRadius: '18px',
-                  padding: '1.6rem',
+                  padding: '1.5rem',
                   position: 'relative',
-                  boxShadow: rank === 1 ? '0 10px 35px rgba(255, 209, 102, 0.2)' : '0 8px 24px rgba(0,0,0,0.7)',
+                  boxShadow: slot.rank === 1 ? '0 10px 35px rgba(255, 209, 102, 0.15)' : '0 8px 24px rgba(0,0,0,0.7)',
                   backdropFilter: 'blur(14px)',
                 }}
               >
+                {/* Rank Badge */}
                 <div
                   style={{
                     position: 'absolute',
@@ -176,82 +208,227 @@ export default function HostelWars() {
                     gap: '5px',
                     fontSize: '0.72rem',
                     fontWeight: '800',
-                    color: rankColor,
-                    background: 'rgba(0,0,0,0.6)',
+                    color: slot.rankColor,
+                    background: 'rgba(0,0,0,0.65)',
                     padding: '4px 12px',
                     borderRadius: '20px',
-                    border: `1px solid ${rankColor}44`,
+                    border: `1px solid ${slot.rankColor}44`,
+                    letterSpacing: '0.06em',
                   }}
                 >
-                  <Crown size={13} style={{ fill: rankColor }} />
-                  {rankTitle}
+                  <Crown size={12} style={{ color: slot.rankColor, fill: slot.rankColor }} />
+                  {slot.rankTitle}
                 </div>
 
+                {/* Icon & Title */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '0.6rem' }}>
                   <div
                     style={{
-                      fontSize: '2.4rem',
-                      width: '56px',
-                      height: '56px',
+                      width: '52px',
+                      height: '52px',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       borderRadius: '14px',
-                      background: `${house.color}22`,
-                      border: `1px solid ${house.color}66`,
+                      background: `radial-gradient(circle, ${slot.rankColor}20 0%, ${slot.rankColor}08 100%)`,
+                      border: `1.5px solid ${slot.rankColor}55`,
+                      boxShadow: `0 0 16px ${slot.rankColor}22`,
+                      flexShrink: 0,
                     }}
                   >
-                    {house.sigil}
+                    {slot.icon}
                   </div>
                   <div>
                     <h3
                       style={{
                         fontFamily: "'Cinzel', Georgia, serif",
-                        fontSize: '1.35rem',
-                        fontWeight: '900',
+                        fontSize: '1.25rem',
+                        fontWeight: '800',
                         color: '#FFFFFF',
-                        letterSpacing: '0.05em',
+                        letterSpacing: '0.08em',
                         margin: 0,
                       }}
                     >
-                      {house.name}
+                      {slot.title}
                     </h3>
-                    <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: house.color, fontWeight: '700' }}>
-                      {house.motto}
+                    <p style={{ margin: '3px 0 0 0', fontSize: '0.78rem', color: slot.rankColor, fontWeight: '700', letterSpacing: '0.04em' }}>
+                      {slot.subtitle}
                     </p>
                   </div>
                 </div>
 
+                <p style={{ fontSize: '0.82rem', color: '#B8A8AB', margin: '0.9rem 0 0 0', lineHeight: 1.5, minHeight: '38px' }}>
+                  {slot.desc}
+                </p>
+
+                {/* Score & Status Bar */}
                 <div
                   style={{
                     marginTop: '1.25rem',
-                    padding: '10px 16px',
+                    padding: '12px 14px',
                     borderRadius: '12px',
-                    background: 'rgba(0, 0, 0, 0.45)',
+                    background: 'rgba(0, 0, 0, 0.55)',
                     display: 'flex',
-                    alignItems: 'baseline',
+                    alignItems: 'center',
                     justifyContent: 'space-between',
-                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    gap: '10px',
+                    border: '1px solid rgba(255, 255, 255, 0.08)',
                   }}
                 >
-                  <span style={{ fontSize: '0.75rem', color: '#B8A8AB', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
-                    Battle Points
-                  </span>
-                  <div
+                  <div>
+                    <span
+                      style={{
+                        fontSize: '0.68rem',
+                        color: '#B8A8AB',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.12em',
+                        fontWeight: '700',
+                        display: 'block',
+                        marginBottom: '3px',
+                      }}
+                    >
+                      Points
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: "'Cinzel', Georgia, serif",
+                        fontSize: '1.35rem',
+                        fontWeight: '900',
+                        color: slot.rankColor,
+                        letterSpacing: '0.05em',
+                        lineHeight: 1,
+                      }}
+                    >
+                      0 PTS
+                    </span>
+                  </div>
+
+                  <span
                     style={{
-                      fontFamily: "'Cinzel', Georgia, serif",
-                      fontSize: '1.5rem',
-                      fontWeight: '900',
-                      color: house.color,
-                      letterSpacing: '0.05em',
+                      fontSize: '0.72rem',
+                      fontWeight: '800',
+                      color: '#FFAA40',
+                      background: 'rgba(255, 170, 64, 0.12)',
+                      border: '1px solid rgba(255, 170, 64, 0.3)',
+                      padding: '5px 12px',
+                      borderRadius: '14px',
+                      letterSpacing: '0.06em',
+                      textTransform: 'uppercase',
+                      whiteSpace: 'nowrap',
                     }}
                   >
-                    {house.points.toLocaleString()} PTS
-                  </div>
+                    Awaiting Event
+                  </span>
                 </div>
               </div>
-            );
-          })}
+            ))
+          ) : (
+            sortedHouses.slice(0, 3).map((house, idx) => {
+              const rank = idx + 1;
+              const rankColor = rank === 1 ? '#FFD166' : rank === 2 ? '#E2E8F0' : '#CD7F32';
+              const rankTitle =
+                rank === 1 ? '1ST PLACE • REIGNING LEADER' : rank === 2 ? '2ND PLACE • CONTENDER' : '3RD PLACE • VANGUARD';
+
+              return (
+                <div
+                  key={house.id}
+                  style={{
+                    background: 'radial-gradient(circle at 40% 30%, rgba(30, 12, 18, 0.95), rgba(8, 4, 6, 0.98))',
+                    border: `1.5px solid ${rank === 1 ? 'rgba(255, 209, 102, 0.7)' : 'rgba(255, 170, 64, 0.3)'}`,
+                    borderRadius: '18px',
+                    padding: '1.6rem',
+                    position: 'relative',
+                    boxShadow: rank === 1 ? '0 10px 35px rgba(255, 209, 102, 0.2)' : '0 8px 24px rgba(0,0,0,0.7)',
+                    backdropFilter: 'blur(14px)',
+                  }}
+                >
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '12px',
+                      right: '14px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '5px',
+                      fontSize: '0.72rem',
+                      fontWeight: '800',
+                      color: rankColor,
+                      background: 'rgba(0,0,0,0.6)',
+                      padding: '4px 12px',
+                      borderRadius: '20px',
+                      border: `1px solid ${rankColor}44`,
+                    }}
+                  >
+                    <Crown size={13} style={{ fill: rankColor }} />
+                    {rankTitle}
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '0.6rem' }}>
+                    <div
+                      style={{
+                        fontSize: '2.4rem',
+                        width: '56px',
+                        height: '56px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: '14px',
+                        background: `${house.color}22`,
+                        border: `1px solid ${house.color}66`,
+                      }}
+                    >
+                      {house.sigil}
+                    </div>
+                    <div>
+                      <h3
+                        style={{
+                          fontFamily: "'Cinzel', Georgia, serif",
+                          fontSize: '1.35rem',
+                          fontWeight: '900',
+                          color: '#FFFFFF',
+                          letterSpacing: '0.05em',
+                          margin: 0,
+                        }}
+                      >
+                        {house.name}
+                      </h3>
+                      <p style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: house.color, fontWeight: '700' }}>
+                        {house.motto}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    style={{
+                      marginTop: '1.25rem',
+                      padding: '10px 16px',
+                      borderRadius: '12px',
+                      background: 'rgba(0, 0, 0, 0.45)',
+                      display: 'flex',
+                      alignItems: 'baseline',
+                      justifyContent: 'space-between',
+                      border: '1px solid rgba(255, 255, 255, 0.06)',
+                    }}
+                  >
+                    <span style={{ fontSize: '0.75rem', color: '#B8A8AB', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                      Battle Points
+                    </span>
+                    <div
+                      style={{
+                        fontFamily: "'Cinzel', Georgia, serif",
+                        fontSize: '1.5rem',
+                        fontWeight: '900',
+                        color: house.color,
+                        letterSpacing: '0.05em',
+                      }}
+                    >
+                      {house.points.toLocaleString()} PTS
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
 
         {/* The Battle Points Graph Visualizer */}
@@ -343,7 +520,7 @@ export default function HostelWars() {
           {graphMode === 'bars' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {sortedHouses.map((house, index) => {
-                const percent = Math.max(12, Math.round((house.points / maxPoints) * 100));
+                const percent = house.points > 0 ? Math.round((house.points / maxPoints) * 100) : 0;
                 const rank = index + 1;
                 const isSelected = selectedHouseId === house.id;
 
@@ -382,12 +559,13 @@ export default function HostelWars() {
                             justifyContent: 'center',
                             fontSize: '0.75rem',
                             fontWeight: '800',
-                            background:
-                              rank === 1 ? '#FFD166' : rank === 2 ? '#CBD5E1' : rank === 3 ? '#CD7F32' : 'rgba(255,255,255,0.1)',
-                            color: rank <= 3 ? '#000000' : '#FFFFFF',
+                            background: allPointsZero
+                              ? 'rgba(255,255,255,0.08)'
+                              : rank === 1 ? '#FFD166' : rank === 2 ? '#CBD5E1' : rank === 3 ? '#CD7F32' : 'rgba(255,255,255,0.1)',
+                            color: allPointsZero ? '#B8A8AB' : rank <= 3 ? '#000000' : '#FFFFFF',
                           }}
                         >
-                          {rank}
+                          {allPointsZero ? '—' : rank}
                         </span>
                         <span style={{ fontSize: '1.2rem' }}>{house.sigil}</span>
                         <span
@@ -451,22 +629,24 @@ export default function HostelWars() {
                           height: '100%',
                           background: `linear-gradient(90deg, ${house.color}77 0%, ${house.color} 100%)`,
                           borderRadius: '7px',
-                          boxShadow: `0 0 15px ${house.accentGlow}`,
+                          boxShadow: percent > 0 ? `0 0 15px ${house.accentGlow}` : 'none',
                           transition: 'width 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
                           position: 'relative',
                         }}
                       >
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            right: 0,
-                            width: '4px',
-                            height: '100%',
-                            background: '#FFFFFF',
-                            boxShadow: '0 0 8px #FFFFFF',
-                          }}
-                        />
+                        {percent > 0 && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: 0,
+                              right: 0,
+                              width: '4px',
+                              height: '100%',
+                              background: '#FFFFFF',
+                              boxShadow: '0 0 8px #FFFFFF',
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -496,7 +676,7 @@ export default function HostelWars() {
                 <div style={{ position: 'absolute', top: '75%', left: 0, right: 0, borderTop: '1px dashed rgba(255,255,255,0.06)' }} />
 
                 {sortedHouses.map((house, idx) => {
-                  const percent = Math.max(14, Math.round((house.points / maxPoints) * 100));
+                  const percent = house.points > 0 ? Math.round((house.points / maxPoints) * 100) : 0;
                   const rank = idx + 1;
 
                   return (
@@ -530,9 +710,10 @@ export default function HostelWars() {
                           width: '70%',
                           maxWidth: '48px',
                           height: `${percent}%`,
+                          minHeight: percent > 0 ? '6px' : '0px',
                           borderRadius: '8px 8px 0 0',
                           background: `linear-gradient(180deg, ${house.color} 0%, ${house.color}66 100%)`,
-                          boxShadow: `0 -4px 15px ${house.accentGlow}`,
+                          boxShadow: percent > 0 ? `0 -4px 15px ${house.accentGlow}` : 'none',
                           transition: 'height 0.8s ease',
                           position: 'relative',
                         }}
@@ -551,7 +732,9 @@ export default function HostelWars() {
                         >
                           H-{house.number}
                         </div>
-                        <div style={{ fontSize: '0.65rem', color: house.color }}>#{rank}</div>
+                        <div style={{ fontSize: '0.65rem', color: house.color }}>
+                          {allPointsZero ? '0 PTS' : `#${rank}`}
+                        </div>
                       </div>
                     </div>
                   );

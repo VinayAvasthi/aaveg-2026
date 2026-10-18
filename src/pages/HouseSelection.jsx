@@ -11,6 +11,7 @@ import GridBackground from '../components/ui/GridBackground';
 import CardSpotlight from '../components/ui/CardSpotlight';
 import FocusCards from '../components/ui/FocusCards';
 import MovingBorder from '../components/ui/MovingBorder';
+import Footer from '../components/common/Footer';
 import { HOUSES } from '../data/registration';
 
 export default function HouseSelection({ onBack }) {
@@ -514,6 +515,7 @@ export default function HouseSelection({ onBack }) {
           )}
         </div>
       </GridBackground>
+      <Footer />
     </div>
   );
 }

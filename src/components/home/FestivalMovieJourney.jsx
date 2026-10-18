@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import {
   Flame,
   Sparkles,
@@ -11,6 +11,7 @@ import {
   Compass,
 } from '../common/Icons';
 import Button from '../common/Button';
+import Footer from '../common/Footer';
 import CardSpotlight from '../ui/CardSpotlight';
 import MovingBorder from '../ui/MovingBorder';
 import Magnetic from '../ui/Magnetic';
@@ -19,7 +20,7 @@ import ShinyText from '../ui/ShinyText';
 import FocusCards from '../ui/FocusCards';
 import GridBackground from '../ui/GridBackground';
 
-export default function FestivalMovieJourney() {
+function FestivalMovieJourney() {
   const [activeAct, setActiveAct] = useState(0);
   const [activeNightTab, setActiveNightTab] = useState(0);
   const scrubBarRef = useRef(null);
@@ -30,60 +31,75 @@ export default function FestivalMovieJourney() {
   const actRefs = useMemo(() => [act0Ref, act1Ref, act2Ref], []);
 
   // Cinematic Movie Chapters
-  const chapters = [
+  const chapters = useMemo(() => [
     { id: 0, tag: 'ACT 01', name: 'THE AWAKENING', title: 'WHAT IS AAVEG?' },
-    { id: 1, tag: 'ACT 02', name: 'THE 3 DAYS', title: 'THE SAGA OF CHAOS' },
+    { id: 1, tag: 'ACT 02', name: 'THE 4 DAYS', title: 'THE SAGA OF CHAOS' },
     { id: 2, tag: 'ACT 03', name: 'EIGHT HOUSES', title: 'THE BATTLE FOR THE CROWN' },
-  ];
+  ], []);
 
-  // The 3 Days Data
+  // The 4 Days Data (Extracted from official itinerary)
   const nights = [
     {
-      night: 'DAY 01',
+      night: 'DAY 0',
+      date: '21 OCT 2026',
+      title: 'THE GENESIS',
+      subtitle: 'POWERLIFTING, SPORTS & ESPORTS KICKOFF',
+      color: '#EF476F',
+      venue: 'Sports Arenas, Gym Complex & Gaming Hub',
+      summary:
+        'The arena awakens with heavy iron powerlifting, opening clashes in volleyball, basketball, racquet sports, table battles, and initial esports qualifiers.',
+      highlights: [
+        'Sports: Volleyball, Basketball, Table Tennis (M&W), Carrom & Badminton (Women)',
+        'Powerlifting: Bench Press, Squats & Deadlift Showdowns',
+        'E-Sports: FC Mobile & Tekken 8 Qualifiers',
+        'Cultural & Fun: Sketching & Jamming Sessions',
+      ],
+    },
+    {
+      night: 'DAY 1',
       date: '22 OCT 2026',
       title: 'THE AWAKENING',
-      subtitle: 'SPORTS, ESPORTS & CULTURE',
+      subtitle: 'ESPORTS FINALS, RACKET & HUNT',
       color: '#FF2B3C',
-      time: 'ALL DAY & NIGHT',
-      venue: 'Sports Arenas, LAN Hub & Grounds',
+      venue: 'Indoor Sports Arena, LAN Hub & Campus Grounds',
       summary:
-        'High-energy sporting battles, intense gaming showdowns, and creative cultural kicks. Day 1 ignites fierce rivalries and sets the stage for three days of non-stop action.',
+        'High-stakes mobile and console esports finals, intense racquet derbies, chess, pool, box cricket, and the midnight campus scavenger hunt.',
       highlights: [
-        'Sports: Pool, Carrom, Chess, Basketball, Badminton, Pickleball & TT',
-        'Esports: Valorant, FC Mobile & Competitive Gaming',
-        'Cultural: Scavenger Hunt, Jamming & Halloween Kickoff',
+        'Sports: Box Cricket, Pickleball, 8 Ball Pool, Chess, Table Tennis Finals & Carrom Finals',
+        'E-Sports: Tekken 8 (Finals), FC Mobile (Finals), BGMI & Free Fire',
+        'Cultural: Midnight Scavenger Hunt',
       ],
     },
     {
-      night: 'DAY 02',
+      night: 'DAY 2',
       date: '23 OCT 2026',
-      title: 'THE HAUNTED CARNIVAL',
-      subtitle: 'CULTURE, CREATIVITY & GRAND NIGHT',
+      title: 'THE CARNIVAL OF CHAOS',
+      subtitle: 'CULTURE, TUG OF WAR & ESPORTS',
       color: '#FF7A32',
-      time: 'ALL DAY & GRAND NIGHT',
-      venue: 'Auditorium, Open Stages & Arenas',
+      venue: 'Main Auditorium, Open Stages & Central Arena',
       summary:
-        'The campus transforms into a Halloween carnival with cultural showdowns, creative arts, and entertainment leading into the most-awaited grand night of AAVEG.',
+        'The campus transforms into an electrifying carnival of dance, singing, fashion walk, dramatic arts, titanic Tug of War battles, running finals, and Valorant.',
       highlights: [
-        'Culture: Singing, Dance, Fashion Walk, Monologue, Face & Tattoo Art',
-        'Stage: Open Mic, Guess the Song, Horror Stories & Mimicry',
-        'Sports & Gaming: Volleyball, Kabaddi, Basketball, Box Cricket & Pickleball',
+        'Culture: Fashion Walk, Dance (Solo & Group), Singing (Solo & Group), Monologue, Face & Tattoo Art',
+        'Sports: Tug of War (Finals), Running (Finals), Badminton Finals, Box Cricket Finals & Pickleball Finals',
+        'E-Sports: Valorant, BGMI (Finals) & Free Fire (Finals)',
+        'Stage: Open Mic, Guess the Song, Horror Story Segment & Mimicry Challenge',
       ],
     },
     {
-      night: 'DAY 03',
+      night: 'DAY 3',
       date: '24 OCT 2026 • FINALE',
       title: 'THE FINAL RECKONING',
-      subtitle: 'CHAMPIONSHIPS, TALENT & GRAND FINALE',
+      subtitle: 'CHAMPIONSHIPS, SHARK TANK & CORONATION',
       color: '#FFAA40',
-      time: 'FINALS TILL DAWN',
-      venue: 'Main Festival Grounds & Arenas',
+      venue: 'Main Festival Grounds & Championship Court',
       summary:
-        'Where champions rise and rivalries peak. High-stakes sports championships, expressive cultural showcases, and the crowning of the ultimate AAVEG 2026 champion house.',
+        'The ultimate climax where house champions are crowned. Basketball & Volleyball grand finals, Arm Wrestling supreme tests, Valorant finale, Shark Tank, and theatrical skits.',
       highlights: [
-        'Sports & Fitness: Tug of War, Kabaddi, Volleyball, Arm Wrestling & Gym Feats',
-        'Culture: Shark Tank Poornima, Poetry, Skit, Paper Dance & Rapid Dance',
-        'Climax: Trophy Coronation & Celebratory Finale',
+        'Sports & Power: Basketball (Final), Volleyball (Final) & Arm Wrestling Championship',
+        'E-Sports: Valorant Grand Finale',
+        'Culture: Shark Tank Poornima, Poetry Competition, Skit, Paper Dance, Rapid Dance & Reverse Antakshari',
+        'Coronation: The Champion House Aaveg Cup Ceremony',
       ],
     },
   ];
@@ -137,11 +153,11 @@ export default function FestivalMovieJourney() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [actRefs]);
 
-  const scrollToAct = (actIdx) => {
+  const scrollToAct = useCallback((actIdx) => {
     if (actRefs[actIdx] && actRefs[actIdx].current) {
       actRefs[actIdx].current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
+  }, [actRefs]);
 
   return (
     <section
@@ -350,7 +366,7 @@ export default function FestivalMovieJourney() {
               cards={[
                 { num: '35+', label: 'ARENA TOURNAMENTS', desc: 'Sports derbies, LAN gaming battles, and cultural stages.' },
                 { num: '1,500+', label: 'HOSTELLERS CLASHING', desc: 'United by fraternity, separated only by house pride.' },
-                { num: '03', label: 'HAUNTED NIGHTS', desc: 'From torchlit graveyard acoustics to EDM inferno finale.' },
+                { num: '04', label: 'HAUNTED DAYS', desc: 'From opening powerlifting qualifiers to the grand coronation finale.' },
                 { num: '01', label: 'ETERNAL TROPHY', desc: 'Only one house hoists the legendary Aaveg Cup.' },
               ]}
               style={{
@@ -413,7 +429,7 @@ export default function FestivalMovieJourney() {
               size="lg"
               icon={<ArrowRight size={18} />}
             >
-              EXPLORE THE 3 NIGHTS →
+              EXPLORE THE 4 DAYS →
             </Button>
           </Magnetic>
         </div>
@@ -453,7 +469,7 @@ export default function FestivalMovieJourney() {
             }}
           >
             <Calendar size={15} style={{ flexShrink: 0 }} />
-            <span>ACT 02 // CHRONICLES • THE 3 DAYS</span>
+            <span>ACT 02 // CHRONICLES • THE 4 DAYS • DAY 0</span>
           </div>
 
           <h2
@@ -468,11 +484,11 @@ export default function FestivalMovieJourney() {
               textShadow: '0 4px 20px rgba(0,0,0,0.95)',
             }}
           >
-            THE THREE DAYS OF <span style={{ color: '#FF7A32' }}>RECKONING</span>
+            THE FOUR DAYS OF <span style={{ color: '#FF7A32' }}>RECKONING</span>
           </h2>
 
           <p style={{ color: '#B8A8AB', fontSize: 'clamp(0.95rem, 1.8vw, 1.1rem)', maxWidth: '720px', margin: '0 auto', lineHeight: '1.6' }}>
-            Three distinct chapters. Three unforgettable days of sports, culture, and glory under the Sitapura sky.
+            Four distinct chapters. Four unforgettable days of sports, esports, and culture under the Sitapura sky.
           </p>
           </div>
 
@@ -582,10 +598,6 @@ export default function FestivalMovieJourney() {
 
                   <div style={{ textAlign: 'left', fontSize: 'clamp(0.78rem, 2vw, 0.85rem)', color: '#B8A8AB' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <Clock size={16} style={{ color: cur.color, flexShrink: 0 }} />
-                      <span style={{ fontWeight: '700', color: '#FFFFFF' }}>{cur.time}</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '6px' }}>
                       <MapPin size={16} style={{ color: cur.color, flexShrink: 0 }} />
                       <span>{cur.venue}</span>
                     </div>
@@ -785,33 +797,11 @@ export default function FestivalMovieJourney() {
           </Magnetic>
         </div>
       </div>
-        {/* Footer */}
-        <footer
-          style={{
-            marginTop: '2rem',
-            padding: '2rem 1rem',
-            background: 'rgba(0,0,0,0.85)',
-            color: '#FFFFFF',
-            textAlign: 'center',
-            borderTop: '1px solid rgba(255, 170, 64, 0.25)',
-          }}
-        >
-          <div style={{ marginBottom: '1rem' }}>
-            <a href="https://aaveg-2026-two.vercel.app/#chronicle" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Chronicle</a>
-            <a href="https://aaveg-2026-two.vercel.app/#houses" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Houses</a>
-            <a href="https://aaveg-2026-two.vercel.app/#leaderboard" style={{ color: '#FFAA40', margin: '0 0.5rem', textDecoration: 'none' }}>Leaderboard</a>
-          </div>
-          <p style={{ margin: '0.5rem 0', color: '#FFAA40' }}>H1 • H2 • H3 • H4 • H5 • H6 • H7 • H8</p>
-<h3 style={{ fontSize: '1rem', marginBottom: '0.5rem' }}>Developed by:</h3>
-          <div style={{ fontSize: '0.85rem', lineHeight: '1.5' }}>
-            <p style={{ margin: '0.2rem 0' }}>Divyansh Yadav (CSE)</p>
-            <p style={{ margin: '0.2rem 0' }}>Aryan Gour (CSE)</p>
-            <p style={{ margin: '0.2rem 0' }}>Kuldeep Gurjar (AI)</p>
-            <p style={{ margin: '0.2rem 0' }}>Ishank Kukreja (AI &amp; DS)</p>
-            <p style={{ margin: '0.2rem 0' }}>Priyanshu Sharma (AI &amp; DS)</p>
-          </div>
-        </footer>
+        {/* Cinematic Gothic Footer */}
+        <Footer />
     </section>
   );
 }
+
+export default React.memo(FestivalMovieJourney);
 

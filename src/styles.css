@@ -246,3 +246,76 @@ a{color:inherit}
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+/* ═══ Official AAVEG Footer ═══ */
+.aaveg-footer {
+  position: relative;
+  width: 100%;
+  margin: 3rem auto 0 auto;
+  line-height: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.footer-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.footer-hotspots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hotspot {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  border-radius: 4px;
+  outline-offset: 3px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hotspot:hover {
+  background: rgba(255, 179, 77, 0.15);
+  box-shadow: 0 0 12px rgba(255, 179, 77, 0.35);
+}
+
+.hotspot:focus-visible {
+  outline: 2px solid #ffb34d;
+  background: rgba(255, 179, 77, 0.15);
+}
+
+/* Navigation hit areas, measured proportionally against the supplied image. */
+.chronicle   { left: 35.0%; top: 29.0%; width: 7.2%; height: 9.0%; }
+.houses      { left: 43.5%; top: 29.0%; width: 5.2%; height: 9.0%; }
+.leaderboard { left: 50.0%; top: 29.0%; width: 9.3%; height: 9.0%; }
+.sponsors    { left: 61.8%; top: 29.0%; width: 6.5%; height: 9.0%; }
+
+/* H1—H8 hit areas. */
+.house { top: 49.0%; height: 8.0%; }
+.h1 { left: 38.5%; width: 2.0%; }
+.h2 { left: 41.8%; width: 2.0%; }
+.h3 { left: 45.0%; width: 2.0%; }
+.h4 { left: 48.2%; width: 2.0%; }
+.h5 { left: 51.6%; width: 2.0%; }
+.h6 { left: 54.8%; width: 2.0%; }
+.h7 { left: 58.1%; width: 2.0%; }
+.h8 { left: 61.4%; width: 2.0%; }
+
+/* Keep the full composition visible on small screens. */
+@media (max-width: 600px) {
+  .aaveg-footer {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+  .footer-art,
+  .footer-hotspots {
+    min-width: 720px;
+  }
+}
+

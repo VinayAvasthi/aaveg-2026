@@ -229,7 +229,7 @@ export const HOUSES = [
         name: 'LAN Esports Inferno',
         category: 'Valorant, BGMI, FIFA & Tekken',
         icon: 'Gamepad2',
-        formUrl: 'https://forms.gle/KVjtSXnoQY8Z9uke8',
+        formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSds6_-lFwavmGBpxmMxB2Vx_KQwKgzr0MvYfnvMnuIoeZRHwA/viewform?usp=dialog',
       },
       cultural: {
         name: 'Gothic Cultural Arena',

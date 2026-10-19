@@ -12,6 +12,7 @@ import {
 } from '../common/Icons';
 import Button from '../common/Button';
 import Footer from '../common/Footer';
+
 import CardSpotlight from '../ui/CardSpotlight';
 import MovingBorder from '../ui/MovingBorder';
 import Magnetic from '../ui/Magnetic';
@@ -797,8 +798,7 @@ function FestivalMovieJourney() {
           </Magnetic>
         </div>
       </div>
-        {/* Cinematic Gothic Footer */}
-        <Footer />
+      <Footer />
     </section>
   );
 }

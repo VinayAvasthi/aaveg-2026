@@ -11,8 +11,10 @@ import GridBackground from '../components/ui/GridBackground';
 import CardSpotlight from '../components/ui/CardSpotlight';
 import FocusCards from '../components/ui/FocusCards';
 import MovingBorder from '../components/ui/MovingBorder';
+
 import Footer from '../components/common/Footer';
 import { HOUSES } from '../data/registration';
+
 
 export default function HouseSelection({ onBack }) {
   const [selectedHouse, setSelectedHouse] = useState(null);
@@ -79,25 +81,27 @@ export default function HouseSelection({ onBack }) {
       className="house-selection-page"
       style={{
         paddingTop: '2.5rem',
-        paddingBottom: '5rem',
+        paddingBottom: '3.5rem',
         backgroundColor: '#050608',
         color: '#F5EAEB',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'visible',
+        overflowX: 'hidden',
+        maxWidth: '100vw',
       }}
     >
       <Spotlight fill="#FF2B3C" opacity={0.24} />
       <BackgroundBeams color="#FF2B3C" />
       <GridBackground color="rgba(255, 43, 60, 0.05)" maskRadius="60%">
         <div
+          className="house-selection-glow"
           style={{
             position: 'absolute',
             top: '15%',
             left: '50%',
             transform: 'translateX(-50%)',
-            width: '800px',
-            height: '500px',
+            width: 'min(800px, 90vw)',
+            height: '450px',
             background: 'radial-gradient(ellipse at center, rgba(229, 9, 20, 0.18) 0%, rgba(120, 8, 14, 0.06) 55%, transparent 75%)',
             filter: 'blur(55px)',
             pointerEvents: 'none',
@@ -105,9 +109,9 @@ export default function HouseSelection({ onBack }) {
           }}
         />
 
-        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 10 }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 1rem', position: 'relative', zIndex: 10 }}>
           {/* Navigation Strip */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
+          <div className="house-nav-strip" style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '2rem' }}>
             <Magnetic strength={0.2}>
               <button
                 onClick={handleBackToOverview}
@@ -214,7 +218,7 @@ export default function HouseSelection({ onBack }) {
           {!selectedHouse ? (
             <>
               {/* Page Header */}
-              <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+              <div className="house-page-header" style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
                 <FloatingElements duration={4} distance={4} rotate={1}>
                   <div
                     style={{
@@ -515,6 +519,7 @@ export default function HouseSelection({ onBack }) {
           )}
         </div>
       </GridBackground>
+
       <Footer />
     </div>
   );

@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, lazy, Suspense } from 'react';
 import { ScrollTrigger } from './lib/gsap';
 import { usePrefersReducedMotion } from './lib/hooks';
 import Hero from './components/Hero.jsx';
-import MovieSagaPage from './pages/MovieSagaPage.jsx';
-import HouseSelection from './pages/HouseSelection.jsx';
-import LeaderboardPage from './pages/LeaderboardPage.jsx';
-import SponsorsPage from './pages/SponsorsPage.jsx';
+
+const MovieSagaPage = lazy(() => import('./pages/MovieSagaPage.jsx'));
+const HouseSelection = lazy(() => import('./pages/HouseSelection.jsx'));
+const LeaderboardPage = lazy(() => import('./pages/LeaderboardPage.jsx'));
+const SponsorsPage = lazy(() => import('./pages/SponsorsPage.jsx'));
 
 function getRouteFromHash() {
   const hash = typeof window !== 'undefined' ? window.location.hash.replace(/^#\/?/, '').toLowerCase() : '';
@@ -55,17 +56,19 @@ export default function App() {
   return (
     <>
       <main>
-        {route === 'chronicle' ? (
-          <MovieSagaPage onBack={handleBackToHome} />
-        ) : route === 'houses' ? (
-          <HouseSelection onBack={handleBackToHome} />
-        ) : route === 'leaderboard' ? (
-          <LeaderboardPage onBack={handleBackToHome} />
-        ) : route === 'sponsors' ? (
-          <SponsorsPage onBack={handleBackToHome} />
-        ) : (
-          <Hero reduced={reduced} />
-        )}
+        <Suspense fallback={<div style={{ minHeight: '100vh', background: '#070608' }} />}>
+          {route === 'chronicle' ? (
+            <MovieSagaPage onBack={handleBackToHome} />
+          ) : route === 'houses' ? (
+            <HouseSelection onBack={handleBackToHome} />
+          ) : route === 'leaderboard' ? (
+            <LeaderboardPage onBack={handleBackToHome} />
+          ) : route === 'sponsors' ? (
+            <SponsorsPage onBack={handleBackToHome} />
+          ) : (
+            <Hero reduced={reduced} />
+          )}
+        </Suspense>
       </main>
       <div className="vignette" aria-hidden="true" />
       <div className="grain" aria-hidden="true" />

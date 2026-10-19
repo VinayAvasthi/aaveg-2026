@@ -6,6 +6,7 @@ import Magnetic from '../components/ui/Magnetic';
 import Button from '../components/common/Button';
 import Footer from '../components/common/Footer';
 
+
 export default function LeaderboardPage({ onBack }) {
   const handleBackToHome = (e) => {
     if (e) e.preventDefault();

@@ -64,15 +64,18 @@ export default function CircularHouseSelector({ onSelectHouse }) {
       style={{
         position: 'relative',
         width: '100%',
+        maxWidth: '100vw',
+        overflowX: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: '2rem 1rem 4rem',
+        padding: '1.5rem 0.75rem 2.5rem',
         userSelect: 'none',
       }}
     >
       <FloatingElements duration={4} distance={4} rotate={1}>
         <div
+          className="circular-selector-pill"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -87,7 +90,7 @@ export default function CircularHouseSelector({ onSelectHouse }) {
             fontWeight: '700',
             letterSpacing: '0.2em',
             textTransform: 'uppercase',
-            marginBottom: '2rem',
+            marginBottom: '1.5rem',
           }}
         >
           <Sparkles size={14} />
@@ -112,8 +115,8 @@ export default function CircularHouseSelector({ onSelectHouse }) {
           }}
           style={{
             position: 'relative',
-            width: 'clamp(280px, 86vw, 620px)',
-            height: 'clamp(280px, 86vw, 620px)',
+            width: 'clamp(260px, 80vw, 580px)',
+            height: 'clamp(260px, 80vw, 580px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -158,7 +161,7 @@ export default function CircularHouseSelector({ onSelectHouse }) {
           >
             {HOUSES.map((house, idx) => {
               const angle = (idx * anglePerStep * Math.PI) / 180;
-              const radius = 42;
+              const radius = 40;
               const x = 50 + radius * Math.cos(angle);
               const y = 50 + radius * Math.sin(angle);
               const isActive = idx === activeIndex;
@@ -181,8 +184,8 @@ export default function CircularHouseSelector({ onSelectHouse }) {
                 >
                   <div
                     style={{
-                      width: 'clamp(44px, 9vw, 68px)',
-                      height: 'clamp(44px, 9vw, 68px)',
+                      width: 'clamp(40px, 8.5vw, 64px)',
+                      height: 'clamp(40px, 8.5vw, 64px)',
                       borderRadius: '50%',
                       background: isActive
                         ? `radial-gradient(circle at 35% 35%, ${house.color} 0%, #15060A 100%)`
@@ -227,8 +230,8 @@ export default function CircularHouseSelector({ onSelectHouse }) {
             style={{
               position: 'relative',
               zIndex: 15,
-              width: 'clamp(185px, 48vw, 310px)',
-              height: 'clamp(185px, 48vw, 310px)',
+              width: 'clamp(165px, 44vw, 290px)',
+              height: 'clamp(165px, 44vw, 290px)',
             }}
           >
             <div
@@ -348,8 +351,9 @@ export default function CircularHouseSelector({ onSelectHouse }) {
 
       {/* Prominent Action Bar for Mobile & Laptop */}
       <div
+        className="circular-action-bar"
         style={{
-          marginTop: '1.75rem',
+          marginTop: '1.25rem',
           display: 'flex',
           justifyContent: 'center',
           width: '100%',
@@ -408,11 +412,12 @@ export default function CircularHouseSelector({ onSelectHouse }) {
 
       {/* Navigation Controls */}
       <div
+        className="circular-nav-controls"
         style={{
           display: 'flex',
           alignItems: 'center',
           gap: '1.25rem',
-          marginTop: '2.5rem',
+          marginTop: '1.5rem',
         }}
       >
         <Magnetic strength={0.3}>
@@ -478,12 +483,13 @@ export default function CircularHouseSelector({ onSelectHouse }) {
 
       {/* Quick House Selector Pill Bar */}
       <div
+        className="circular-quick-pills"
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           gap: '8px',
           justifyContent: 'center',
-          marginTop: '1.5rem',
+          marginTop: '1.25rem',
           maxWidth: '680px',
         }}
       >

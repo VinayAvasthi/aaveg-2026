@@ -7,6 +7,7 @@ import Magnetic from '../components/ui/Magnetic';
 import FloatingElements from '../components/ui/FloatingElements';
 import Footer from '../components/common/Footer';
 
+
 export default function SponsorsPage({ onBack }) {
   const handleBackToHome = (e) => {
     if (e) e.preventDefault();
@@ -558,8 +559,8 @@ export default function SponsorsPage({ onBack }) {
           </div>
         </div>
 
-        {/* Cinematic Gothic Footer */}
-        <Footer />
+
+      <Footer />
       </div>
     </div>
   );

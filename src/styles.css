@@ -483,7 +483,7 @@ a{color:inherit}
 @media (max-width: 680px) {
   .house-selection-page {
     padding-top: 1.25rem !important;
-    padding-bottom: 2rem !important;
+    padding-bottom: 0 !important;
   }
   .house-selection-glow {
     width: 90vw !important;

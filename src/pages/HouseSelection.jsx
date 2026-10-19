@@ -81,7 +81,7 @@ export default function HouseSelection({ onBack }) {
       className="house-selection-page"
       style={{
         paddingTop: '2.5rem',
-        paddingBottom: '3.5rem',
+        paddingBottom: 0,
         backgroundColor: '#050608',
         color: '#F5EAEB',
         minHeight: '100vh',

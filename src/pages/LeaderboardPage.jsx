@@ -29,11 +29,11 @@ export default function LeaderboardPage({ onBack }) {
       className="leaderboard-page"
       style={{
         paddingTop: '2.5rem',
-        paddingBottom: '5rem',
+        paddingBottom: 0,
         backgroundColor: '#050608',
         minHeight: '100vh',
         position: 'relative',
-        overflow: 'visible',
+        overflowX: 'hidden',
         width: '100%',
         color: '#F5EAEB',
       }}

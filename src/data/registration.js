@@ -235,7 +235,7 @@ export const HOUSES = [
         name: 'Gothic Cultural Arena',
         category: 'Rock Battle, Masquerade Runway & Rap Cyphers',
         icon: 'Music',
-        formUrl: 'https://forms.gle/b7pe3GzYuUJoeuhw5',
+        formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLSds6_-lFwavmGBpxmMxB2Vx_KQwKgzr0MvYfnvMnuIoeZRHwA/viewform?usp=dialog',
       },
     },
   },

@@ -7,7 +7,7 @@ export default function Spotlight({
 }) {
   return (
     <svg
-      className={`pointer-events-none absolute z-10 ${className}`}
+      className={`spotlight-svg pointer-events-none absolute z-10 ${className}`}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 3787 2842"
       fill="none"
